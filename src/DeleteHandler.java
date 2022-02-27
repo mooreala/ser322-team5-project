@@ -29,6 +29,7 @@ public class DeleteHandler {
                 dataSelect = input.nextInt();
 
                 switch (dataSelect) {
+                /* CASE 1 *********************************************************************************************************************************/
                     case 1:
                         query += "GAME, CHARACTER_IN_GAME, PUBLISHER, DEVELOPER WHERE GAMEID=?";
                         stmt = conn.prepareStatement(query);
@@ -60,6 +61,7 @@ public class DeleteHandler {
 
                         validInput = true;
                         break;
+                /* CASE 2 *********************************************************************************************************************************/
                     case 2:
                         query += "CHARACTER_IN_GAME WHERE C_NAME=?";
                         stmt = conn.prepareStatement(query);
@@ -91,6 +93,7 @@ public class DeleteHandler {
 
                         validInput = true;
                         break;
+                /* CASE 3 *********************************************************************************************************************************/
                     case 3:
                         query += "GAME_SALES WHERE GAMEID=?AND M_MONTH=? AND Y_YEAR=?";
                         stmt = conn.prepareStatement(query);
@@ -130,6 +133,7 @@ public class DeleteHandler {
 
                         validInput = true;
                         break;
+                /* CASE 4 *********************************************************************************************************************************/
                     case 4:
                         query += "PERSON, END_USER, COMPOSER, PUBLISHER, DEVELOPER WHERE SSN=?"; 
                         stmt = conn.prepareStatement(query);
@@ -161,6 +165,7 @@ public class DeleteHandler {
 
                         validInput = true;
                         break;
+                /* DEFAULT *********************************************************************************************************************************/
                     default:
                         System.out.println("Please select a valid selection...\n");
                         System.out.println("1 - Game\n2 - Character\n3 - Game Sales\n4 - Person");
