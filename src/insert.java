@@ -2,6 +2,7 @@ import java.sql.Statement;
 
 public class insert {
 
+	  public static void main(String[] args){
 	int gameID;
 	int ssn;
 	Statement insert = con.createStatement();
@@ -100,5 +101,5 @@ public class insert {
 		insert.executeUpdate("INSERT INTO" + table + "VALUES (ssn, gameID)");
 
 	}
-
+	  }
 }
