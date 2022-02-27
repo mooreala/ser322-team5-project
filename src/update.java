@@ -1,5 +1,7 @@
 
 public class update {
+	
+	  public static void main(String[] args){
 
 	Statement updateS = con.createStatement();
 	String table = args[0];
@@ -99,4 +101,5 @@ public class update {
 
 	}
 
+	  }
 }
