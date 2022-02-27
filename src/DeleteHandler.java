@@ -23,14 +23,14 @@ public class DeleteHandler {
         System.out.println("Please choose data type to delete:");
         System.out.println("1 - Game\n2 - Character\n3 - Game Sales\n4 - Person\n0 - Return to main menu");
 
-        boolean validInput = false;
-        while (!validInput) {
+        boolean quit = false;
+        while (!quit) {
             try {
                 dataSelect = input.nextInt();
 
                 switch (dataSelect) {
                     case 0:
-                        validInput = true;
+                        quit = true;
                         System.out.println("Returning to main menu...");
                         break;
                 /* CASE 1 *********************************************************************************************************************************/
@@ -62,8 +62,6 @@ public class DeleteHandler {
                             System.out.println("Unable to execute query. Try again.");
                             break;
                         }
-
-                        validInput = true;
                         break;
                 /* CASE 2 *********************************************************************************************************************************/
                     case 2:
@@ -94,8 +92,6 @@ public class DeleteHandler {
                             System.out.println("Unable to execute query. Try again.");
                             break;
                         }
-
-                        validInput = true;
                         break;
                 /* CASE 3 *********************************************************************************************************************************/
                     case 3:
@@ -134,8 +130,6 @@ public class DeleteHandler {
                             System.out.println("Unable to execute query. Try again.");
                             break;
                         }
-
-                        validInput = true;
                         break;
                 /* CASE 4 *********************************************************************************************************************************/
                     case 4:
@@ -166,8 +160,6 @@ public class DeleteHandler {
                             System.out.println("Unable to execute query. Try again.");
                             break;
                         }
-
-                        validInput = true;
                         break;
                 /* DEFAULT *********************************************************************************************************************************/
                     default:
