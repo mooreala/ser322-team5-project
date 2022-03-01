@@ -1,10 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-//cd C:\Users\chris\eclipse-workspace\Project4\src\
-//javac *.java
-//java Project4Files.CLIMenu
+//Program to connect to a database and display a looped command to edit DB
 public class CLIMenu {
 	private  String input;
 	private  BufferedReader reader;
