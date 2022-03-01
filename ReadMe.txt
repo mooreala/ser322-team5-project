@@ -98,7 +98,14 @@ Alana:
     - Modified sql create script to add delete cascades to all child tables.
 
 Christopher:
-
+    - Created  menu application that connect users to a DB and loops through commands to modify the DB.
+    
+    - Created the first section of the video which shows users how to setup DB and start the application from cmd line.
+    
+    - Created DBConnect class which helps with connecting to a DB.
+    
+    - Created CLIMenu class which is the application entry point.
+    
 Josh:
 
 Luca:
