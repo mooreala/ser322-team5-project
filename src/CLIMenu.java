@@ -4,13 +4,35 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+//cd C:\Users\chris\eclipse-workspace\Project4\src\
+//javac *.java
+//java Project4Files.CLIMenu
 public class CLIMenu {
 	private  String input;
 	private  BufferedReader reader;
 	public int actionType;
+	public static DBConnect db;
+	public static boolean connected = false;
 	public String invalid = "--Invalid Data - Try Again--";
 	public static void main(String[] args) throws IOException {
+		if(connected)
+		{
+			new CLIMenu().MainMenuDisplay();
+		}
+		System.out.print("Enter Database name, username,password and driver to connect to DB:");
+		new CLIMenu().Connection();
 		new CLIMenu().MainMenuDisplay();
+		
+	}
+	private void Connection() throws IOException
+	{
+		reader = new BufferedReader(
+	            new InputStreamReader(System.in));
+		input = reader.readLine();
+		String[] array = input.split(" ");
+		 db = new DBConnect(array[0],array[1],array[2],array[3]);
+		System.out.println("Connection to DB Succesfull!");		
+		
 	}
 	
 	private void MainMenuDisplay() throws IOException
@@ -28,12 +50,11 @@ public class CLIMenu {
 			break;
 		case "U":
 			actionType = 2;
-
 			Command("Update");
 			break;
 		case "D":
-			actionType = 3;
-			Command("Delete");
+			//actionType = 3;
+			//Call Delete
 			break;
 		case "Q":
 			actionType = 4;
@@ -68,8 +89,19 @@ public class CLIMenu {
 				input = reader.readLine();
 				UpdatePersonMenu(input);
 				break;
-			case 3:
-				DeletePersonMenu();
+			}
+			break;
+		case "G":
+			switch (actionType) {
+			case 1:
+				InsertGameMenu();
+				break;
+			case 2:
+				System.out.print("Type Game ID:");
+				input = reader.readLine();
+				Game obj = new Game();
+				obj = db.QueryGame(input);
+				UpdateGameMenu(obj);
 				break;
 			}
 			break;
@@ -95,6 +127,7 @@ public class CLIMenu {
 		{
 			System.out.println(invalid);
 			InsertPersonMenu();
+			return;
 		}
 		Person obj = new Person();
 		obj.SSN = values[0];
@@ -110,12 +143,14 @@ public class CLIMenu {
 		Person obj = new Person();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Person.ListAttributes();
+		System.out.print("Selection:");
 		input = reader.readLine();//Which attribute to edit
 		//Update Object value and loop
 		switch (input) {
 		case "":
 			//TODO UPDATE The obj is passed as argument
 			System.out.println("TODO Update Person");
+			MainMenuDisplay();
 			return;
 		case "1":
 			System.out.print("New SSN:");
@@ -142,18 +177,81 @@ public class CLIMenu {
 		}
 		UpdatePersonMenu(SSN);
 	}
-	private void DeletePersonMenu() throws IOException {
-		System.out.print("Enter SSN of Person to be deleted:");
+
+	
+	private void InsertGameMenu() throws IOException {
+		System.out.print("Format [GAME_ID] [PAGE_VIEWS] [GENRE] [SCORE] [PLOT] [RETAILERS] [PLATFORM] [RATING] [TITLE]\nType game information:");
 		input = reader.readLine();
-		System.out.println("TODO Delete Person");
-		//TODO DELETE the input is passed as argument
-		System.out.println("----Person Deleted----");
-		MainMenuDisplay();
+		String[] values = input.split(" ");
+		if(values.length != 9)
+		{
+			System.out.println(invalid);
+			InsertGameMenu();
+			return;
+		}
+		Game obj = new Game();
+		obj.gameID = values[0];
+		obj.pageViews = values[1];
+		obj.approvedFlag = "TRUE";
+		obj.genre = values[2];
+		obj.score = values[3];
+		obj.plot = values[4];
+		obj.retialer = values[5];
+		obj.platform = values[6];
+		obj.rating = values[7];
+		obj.title = values[8];
+		System.out.println("TODO Insert Game");
+		//TODO INSERT
+		
 	}
+	private void UpdateGameMenu(Game obj) throws IOException {
+		//Need to check if SSN is valid and pull data from DB
+				System.out.println("Select attribute to update or press enter to execute changes:");
+				Game.ListAttributes();
+				System.out.print("Selection:");
+				input = reader.readLine();//Which attribute to edit
+				//Update Object value and loop
+				switch (input) {
+				case "":
+					db.UpdateGame(obj);
+					System.out.println("Game Updated!");
+					MainMenuDisplay();
+					return;
+				case "1":
+					System.out.print("New Genre:");
+					input = reader.readLine();
+					obj.genre = input;
+					break;
+				case "2":
+					System.out.print("New Title:");
+					input = reader.readLine();
+					obj.title = input;
+					break;
+				case "3":
+					System.out.print("New PageViews:");
+					input = reader.readLine();
+					obj.pageViews = input;
+					break;
+				case "4":
+					System.out.print("New Platform:");
+					input = reader.readLine();
+					obj.platform = input;
+					break;
+				case "5":
+					System.out.print("New Score:");
+					input = reader.readLine();
+					obj.score = input;
+					break;
+					default:
+						System.out.println(invalid);
+				}
+				UpdateGameMenu(obj);
+	}
+
 	
 	
 	private void DisplayExit() {
-		 System.out.print("\tExit (X)\n\tMain Menu (M)\nCommand:");
+		 System.out.print("\tExit (X)\n\tMain Menu (M)\n-----------------\nCommand:");
 	}
 	
 
