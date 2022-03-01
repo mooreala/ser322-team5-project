@@ -110,9 +110,12 @@ Josh:
 
 Luca:
 
-        -Wrote the insert functions that occurs in the main CLIMenu
-        -Wrote the update functions
-        -Had part of video showing my work and how the database reflected it
-        -Debugged and edited CLIMenu
+    -  Wrote the insert functions that occurs in the main CLIMenu
+        
+    -  Wrote the update functions
+        
+    -  Had part of video showing my work and how the database reflected it
+        
+    -  Debugged and edited CLIMenu
 
 
