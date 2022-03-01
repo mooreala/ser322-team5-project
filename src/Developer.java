@@ -6,4 +6,7 @@ public class Developer {
 	{
 		return "\tDeveloper (D)\n";
 	}
+		public static void ListAttributes() {
+		 System.out.println("\t1 SSN\n\t2 Game_ID");
+	}
 }
