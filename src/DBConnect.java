@@ -51,7 +51,6 @@ public class DBConnect {
 	{
 		ResultSet rs = null;
 		Statement stmnt = null;
-		Connection conn = null;
 		try {
 			//Load the JDBC driver
 			Class.forName(driver);
@@ -106,7 +105,6 @@ public class DBConnect {
 	public Game QueryGame(String GameID) {
 		ResultSet rs = null;
 		Statement stmnt = null;
-		Connection conn = null;
 		Game obj = new Game();
 		try {
 			String sql = "SELECT *\r\n"
@@ -146,7 +144,6 @@ public class DBConnect {
 	public User QueryUser(String SSN) {
 		ResultSet rs = null;
 		Statement stmnt = null;
-		Connection conn = null;
 		User obj = new User();
 		try {
 			String sql = "SELECT *\r\n"
@@ -183,7 +180,6 @@ public class DBConnect {
 	public Person QueryPerson(String SSN) {
 		ResultSet rs = null;
 		Statement stmnt = null;
-		Connection conn = null;
 		Person obj = new Person();
 		try {
 			//Load the JDBC driver
@@ -226,7 +222,6 @@ public class DBConnect {
 	public Character QueryCharacter(String GameID) {
 		ResultSet rs = null;
 		Statement stmnt = null;
-		Connection conn = null;
 		Character obj = new Character();
 		try {
 			//Make query
@@ -263,7 +258,6 @@ public class DBConnect {
 	public Developer QueryDeveloper(String SSN) {
 		ResultSet rs = null;
 		Statement stmnt = null;
-		Connection conn = null;
 		Developer obj = new Developer();
 		try {
 			//Load the JDBC driver
@@ -306,7 +300,6 @@ public class DBConnect {
 	{
 		ResultSet rs = null;
 		Statement stmnt = null;
-		Connection conn = null;
 		try {
 			//Load the JDBC driver
 			Class.forName(driver);
