@@ -138,7 +138,15 @@ public class CLIMenu {
 		obj.lastName = values[2];
 		obj.DOB = values[3];
 		System.out.println("TODO Insert Person");
-		//TODO INSERT
+		
+			ssn = obj.SSN;
+			String firstName = obj.firstName;
+			String lastName = obj.lastName;
+			String dob = obj.DOB;
+			String fullName = obj.getFullName();
+
+			insert.executeUpdate("INSERT INTO PERSON" + "VALUES (SSN, firstName, lastName, dob, fullName)");
+		
 	}
 	private void UpdatePersonMenu(String SSN) throws IOException
 	{
@@ -159,22 +167,37 @@ public class CLIMenu {
 			System.out.print("New SSN:");
 			input = reader.readLine();
 			obj.SSN = input;
+				
+				String ssn = obj.SSN;
+				updateStatement.executeUpdate("UPDATE PERSON SET SSN = ssn WHERE SSN=ssn");
 			break;
 		case "2":
 			System.out.print("New First Name:");
 			input = reader.readLine();
 			obj.firstName = input;
+				
+				String firstName = obj.firstName;
+				updateStatement.executeUpdate("UPDATE PERSON SET FIRST_NAME = firstName WHERE SSN=ssn");
+				
 			break;
 		case "3":
 			System.out.print("New Last Name:");
 			input = reader.readLine();
 			obj.lastName = input;
+				
+				String lastName = obj.lastName;
+				updateStatement.executeUpdate("UPDATE PERSON SET LAST_NAME = lastName WHERE SSN=ssn");
+					
 			break;
 		case "4":
 			System.out.print("New DOB:");
 			input = reader.readLine();
 			obj.DOB = input;
 			break;
+				
+				String dob = obj.DOB;
+				updateStatement.executeUpdate("UPDATE PERSON SET DOB = dob WHERE SSN=ssn");
+				
 			default:
 				System.out.println(invalid);
 		}
@@ -206,6 +229,20 @@ public class CLIMenu {
 		System.out.println("TODO Insert Game");
 		//TODO INSERT
 		
+		gameID = obj.gameID;
+			String pageViews = obj.pageViews;
+			String approvedFlag = obj.approvedFlag;
+			String genre = obj.genre;
+			String score = obj.score;
+			String plot = obj.plot;
+			String retailers = obj.retailers;
+			String platform = obj.platform;
+			String rating = obj.rating;
+			String title = obj.title;
+
+			insert.executeUpdate("INSERT INTO GAME"
+					+ "VALUES (gameID, pageViews, genre, score, plot, retailers, platform, rating, title)");
+
 	}
 	private void UpdateGameMenu(Game obj) throws IOException {
 		//Need to check if SSN is valid and pull data from DB
@@ -214,6 +251,8 @@ public class CLIMenu {
 				System.out.print("Selection:");
 				input = reader.readLine();//Which attribute to edit
 				//Update Object value and loop
+		
+				String gameID = obj.gameID;
 				switch (input) {
 				case "":
 					db.UpdateGame(obj);
@@ -224,26 +263,45 @@ public class CLIMenu {
 					System.out.print("New Genre:");
 					input = reader.readLine();
 					obj.genre = input;
+						
+						String genre = obj.genre;
+						updateStatement.executeUpdate("UPDATE GAME SET GENRE = genre WHERE GAME_ID = gameID");
+						
+						
 					break;
 				case "2":
 					System.out.print("New Title:");
 					input = reader.readLine();
 					obj.title = input;
+						
+						String title = obj.title;
+						updateStatement.executeUpdate("UPDATE GAME SET TITLE = title WHERE GAME_ID = gameID");
 					break;
 				case "3":
 					System.out.print("New PageViews:");
 					input = reader.readLine();
 					obj.pageViews = input;
+						
+						String pageViews = obj.pageViews;
+						updateStatement.executeUpdate("UPDATE GAME SET PAGE_VIEWS = pageViews WHERE GAME_ID = gameID");
 					break;
 				case "4":
 					System.out.print("New Platform:");
 					input = reader.readLine();
 					obj.platform = input;
+						
+						String platform = obj.platform;
+						updateStatement.executeUpdate("UPDATE GAME SET PLATFORM = platform WHERE GAME_ID = gameID");
+						
 					break;
 				case "5":
 					System.out.print("New Score:");
 					input = reader.readLine();
 					obj.score = input;
+						
+						String score = obj.score;
+						updateStatement.executeUpdate("UPDATE GAME SET SCORE = score WHERE GAME_ID = gameID");
+						
 					break;
 					default:
 						System.out.println(invalid);
