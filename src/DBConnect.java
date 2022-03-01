@@ -234,7 +234,7 @@ public class DBConnect {
 			while (rs.next())
 			{
 				obj.name = rs.getString(1);
-				obj.GameID = rs.getString(2);
+				obj.GameID = rs.getInt(2);
 			}
 			//Close connections
 		} catch (Exception e) {
