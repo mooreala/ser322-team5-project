@@ -295,7 +295,114 @@ public class DBConnect {
 		}
 		return obj;
 	}
-	
+	public Composer QueryComposer(String SSN) {
+		ResultSet rs = null;
+		Statement stmnt = null;
+		Composer obj = new Composer();
+		try {
+			String sql = "SELECT *\r\n"
+					+ "FROM COMPOSER\r\n"
+					+ "WHERE SSN=" + SSN
+					;
+			stmnt = conn.createStatement();
+			rs = stmnt.executeQuery(sql);
+			while (rs.next())
+			{
+				obj.SSN = rs.getString(1);
+				obj.GameID = rs.getString(2);
+			}
+			//Close connections
+		} catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{
+				if(rs !=null) rs.close();
+				if(stmnt !=null) stmnt.close();
+				if(conn !=null) conn.close();
+			}
+			catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+		return obj;
+	}
+	public GameSales QueryGameSales(String GameID) {
+		ResultSet rs = null;
+		Statement stmnt = null;
+		GameSales obj = new GameSales();
+		try {
+			String sql = "SELECT *\r\n"
+					+ "FROM GAME_SALES\r\n"
+					+ "WHERE GAME_ID=" + GameID
+					;
+			stmnt = conn.createStatement();
+			rs = stmnt.executeQuery(sql);
+			while (rs.next())
+			{
+				obj.GameID = rs.getString(1);
+				obj.Month = rs.getString(2);
+				obj.Year = rs.getString(3);
+				obj.Amount = rs.getString(4);
+			}
+			//Close connections
+		} catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{
+				if(rs !=null) rs.close();
+				if(stmnt !=null) stmnt.close();
+				if(conn !=null) conn.close();
+			}
+			catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+		return obj;
+	}
+	public Publisher QueryPublisher(String GameID) {
+		ResultSet rs = null;
+		Statement stmnt = null;
+		Publisher obj = new Publisher();
+		try {
+			String sql = "SELECT *\r\n"
+					+ "FROM PUBLISHER\r\n"
+					+ "WHERE SSN=" + GameID
+					;
+			stmnt = conn.createStatement();
+			rs = stmnt.executeQuery(sql);
+			while (rs.next())
+			{
+				obj.CompanyName = rs.getString(1);
+				obj.GameID = rs.getString(2);
+			}
+			//Close connections
+		} catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{
+				if(rs !=null) rs.close();
+				if(stmnt !=null) stmnt.close();
+				if(conn !=null) conn.close();
+			}
+			catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+		return obj;
+	}
+	//This method updates data, not sure if we will use it
 	public void UpdateGame(Game obj)
 	{
 		ResultSet rs = null;
