@@ -92,9 +92,11 @@ public class CLIMenu {
 				InsertPersonMenu();
 				break;
 			case 2:
-				System.out.print("Type person ID:");
+				System.out.print("Type Person SSN:");
 				input = reader.readLine();
-				UpdatePersonMenu(input);
+				User obj = new User();
+				obj = db.QueryUser(input);
+				UpdatePersonMenu(obj);
 				break;
 			}
 			break;
@@ -109,6 +111,90 @@ public class CLIMenu {
 				Game obj = new Game();
 				obj = db.QueryGame(input);
 				UpdateGameMenu(obj);
+				break;
+			}
+			break;
+		case "U":
+			switch (actionType) {
+			case 1:
+				InsertUserMenu();
+				break;
+			case 2:
+				System.out.print("Type User SSN:");
+				input = reader.readLine();
+				User obj = new User();
+				obj = db.QueryUser(input);
+				UpdateUserMenu(obj);
+				break;
+			}
+			break;
+		case "C":
+			switch (actionType) {
+			case 1:
+				InsertCharacterMenu();
+				break;
+			case 2:
+				System.out.print("Type GameID:");
+				input = reader.readLine();
+				Character obj = new Character();
+				obj = db.QueryCharacter(input);
+				UpdateCharacterMenu(obj);
+				break;
+			}
+			break;
+		case "D":
+			switch (actionType) {
+			case 1:
+				InsertDeveloperMenu();
+				break;
+			case 2:
+				System.out.print("Type GameID:");
+				input = reader.readLine();
+				Developer obj = new Developer();
+				obj = db.QueryDeveloper(input);
+				UpdateDeveloperMenu(obj);
+				break;
+			}
+			break;
+		case "CO":
+			switch (actionType) {
+			case 1:
+				InsertComposerMenu();
+				break;
+			case 2:
+				System.out.print("Type GameID:");
+				input = reader.readLine();
+				Composer obj = new Composer();
+				obj = db.QueryComposer(input);
+				UpdateComposerMenu(obj);
+				break;
+			}
+			break;
+		case "GS":
+			switch (actionType) {
+			case 1:
+				InsertGameSalesMenu();
+				break;
+			case 2:
+				System.out.print("Type GameID:");
+				input = reader.readLine();
+				GameSales obj = new GameSales();
+				obj = db.QueryGameSales(input);
+				UpdateGameSalesMenu(obj);
+				break;
+			}
+			break;
+		case "PU":
+			switch (actionType) {
+			case 1:
+				InsertPublisherMenu();
+				break;
+			case 2:
+				System.out.print("Type GameID:");
+				input = reader.readLine();
+				Publisher obj = new Publisher();
+				obj = db.QueryPublisher(input);
+				UpdatePublisherMenu(obj);
 				break;
 			}
 			break;
