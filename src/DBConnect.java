@@ -1,5 +1,3 @@
-package Project4Files;
-
 import java.sql.*;
 
 public class DBConnect {
@@ -10,13 +8,48 @@ public class DBConnect {
 	String userName;
 	String password;
 	String driver;
+
+    Connection conn;
+
 	public  DBConnect(String pUrl, String pUsername, String pPassword, String pDriver) {
 		url = pUrl;
 		userName = pUsername;
 		password = pPassword;
 		driver = pDriver;
+        conn= null;
 			}
 	
+    public void Connection() {
+        try {
+            /* load the driver */
+            try {
+                Class.forName(driver);
+            } catch (ClassNotFoundException e) {
+                System.out.println("Error loading driver...");
+                e.printStackTrace();
+            }
+
+            /* open connection */
+            conn = DriverManager.getConnection(url, userName, password);
+        } catch (SQLException e) {
+            System.out.println("Failed to connect to database.");
+            e.printStackTrace();
+        }
+    }
+
+    public void CloseConnection() {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("Error closing database connection...");
+            e.printStackTrace();
+        }
+    }
+
+    public Connection getConn() {
+        return this.conn;
+    }
+
 	public void QueryGame()
 	{
 		ResultSet rs = null;
