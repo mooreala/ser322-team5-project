@@ -4,5 +4,8 @@ public class Composer {
 	public static String Command() {
 		return "\tComposer (C)\n";
 	}
+	public static void ListAttributes() {
+		 System.out.println("\t1 SSN\n\t2 Game_ID");
+	}
 
 }
