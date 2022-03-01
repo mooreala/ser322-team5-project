@@ -34,7 +34,7 @@ public class DeleteHandler {
                         break;
                 /* CASE 1 *********************************************************************************************************************************/
                     case 1:
-                        delete += "GAME, CHARACTER_IN_GAME, PUBLISHER, DEVELOPER WHERE GAMEID=?";
+                        delete += "GAME, CHARACTER_IN_GAME, GAME_SALES, PUBLISHER, DEVELOPER, COMPOSER WHERE GAMEID=?";
                         stmt = conn.prepareStatement(delete);
 
                         /* get gameID */
