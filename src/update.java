@@ -1,4 +1,3 @@
-
 public class update {
 
 	public void insert() {

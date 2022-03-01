@@ -38,9 +38,7 @@ public class CLIMenu {
 			System.exit(1);
 		}
 		System.out.println("Connection to DB Succesfull!");
-
-		dHandler = new DeleteHandler(db);
-
+        dHandler = new DeleteHandler(db);
 	}
 
 	private void MainMenuDisplay() throws IOException {
@@ -71,7 +69,7 @@ public class CLIMenu {
 			break;
 		case "X":
 			System.out.println("Program terminated...");
-			db.CloseConnection();
+            db.CloseConnection();
 			System.exit(0);
 			break;
 		default:
