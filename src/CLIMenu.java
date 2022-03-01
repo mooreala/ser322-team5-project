@@ -40,7 +40,7 @@ public class CLIMenu {
 		reader = new BufferedReader(
 	            new InputStreamReader(System.in));
 		System.out.println("----MAIN MENU----\nSelect command:");
-		System.out.print(Insert.Command() + Update.Command() + Delete.Command() + "\tQuery (Q)\n");
+		System.out.print("\tInsert (I)\n" + "\tUpdate (U)\n" + "\tDelete (D)\n" + "\tQuery (Q)\n");
 		DisplayExit();
 		input = reader.readLine();
 		switch (input.toUpperCase()) {
