@@ -1,9 +1,6 @@
 import java.sql.*;
 
 public class DBConnect {
-//C:\Users\chris\eclipse-workspace\Project4\src\
-//java JdbcLab.java jdbc:mysql://localhost:3306/project5 root Id1034872 com.mysql.cj.jdbc.Driver
-//[DATABASE NAME] [USERNAME] [PASSWORD] [DRIVER]
 	String url;
 	String userName;
 	String password;
@@ -107,17 +104,11 @@ public class DBConnect {
 		System.out.println("---------------------------------------------------------------------------------------------");
 	}
 	public Game QueryGame(String GameID) {
-
-		Game obj = new Game();
 		ResultSet rs = null;
 		Statement stmnt = null;
 		Connection conn = null;
+		Game obj = new Game();
 		try {
-			//Load the JDBC driver
-			Class.forName(driver);
-			//Make connection
-			conn = DriverManager.getConnection(url, userName, password);
-			//Make query
 			String sql = "SELECT *\r\n"
 					+ "FROM Game\r\n"
 					+ "WHERE GAME_ID=" + GameID
@@ -152,6 +143,165 @@ public class DBConnect {
 		}
 		return obj;
 	}
+	public User QueryUser(String SSN) {
+		ResultSet rs = null;
+		Statement stmnt = null;
+		Connection conn = null;
+		User obj = new User();
+		try {
+			String sql = "SELECT *\r\n"
+					+ "FROM END_USER\r\n"
+					+ "WHERE SSN=" + SSN
+					;
+			stmnt = conn.createStatement();
+			rs = stmnt.executeQuery(sql);
+			while (rs.next())
+			{
+				obj.EndUserName = rs.getString(1);
+				obj.AdminFlag = rs.getString(2);
+				obj.SSN = rs.getString(3);
+			}
+			//Close connections
+		} catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{
+				if(rs !=null) rs.close();
+				if(stmnt !=null) stmnt.close();
+				if(conn !=null) conn.close();
+			}
+			catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+		return obj;
+	}
+	public Person QueryPerson(String SSN) {
+		ResultSet rs = null;
+		Statement stmnt = null;
+		Connection conn = null;
+		Person obj = new Person();
+		try {
+			//Load the JDBC driver
+			Class.forName(driver);
+			//Make connection
+			conn = DriverManager.getConnection(url, userName, password);
+			//Make query
+			String sql = "SELECT *\r\n"
+					+ "FROM PERSON\r\n"
+					+ "WHERE SSN=" + SSN
+					;
+			stmnt = conn.createStatement();
+			rs = stmnt.executeQuery(sql);
+			while (rs.next())
+			{
+				obj.SSN = rs.getString(1);
+				obj.firstName = rs.getString(2);
+				obj.lastName = rs.getString(3);
+				obj.DOB = rs.getString(4);
+			}
+			//Close connections
+		} catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{
+				if(rs !=null) rs.close();
+				if(stmnt !=null) stmnt.close();
+				if(conn !=null) conn.close();
+			}
+			catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+		return obj;
+	}
+	public Character QueryCharacter(String GameID) {
+		ResultSet rs = null;
+		Statement stmnt = null;
+		Connection conn = null;
+		Character obj = new Character();
+		try {
+			//Make query
+			String sql = "SELECT *\r\n"
+					+ "FROM CHARACTER_IN_GAME\r\n"
+					+ "WHERE GAME_ID=" + GameID
+					;
+			stmnt = conn.createStatement();
+			rs = stmnt.executeQuery(sql);
+			while (rs.next())
+			{
+				obj.name = rs.getString(1);
+				obj.GameID = rs.getString(2);
+			}
+			//Close connections
+		} catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{
+				if(rs !=null) rs.close();
+				if(stmnt !=null) stmnt.close();
+				if(conn !=null) conn.close();
+			}
+			catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+		return obj;
+	}
+	public Developer QueryDeveloper(String SSN) {
+		ResultSet rs = null;
+		Statement stmnt = null;
+		Connection conn = null;
+		Developer obj = new Developer();
+		try {
+			//Load the JDBC driver
+			Class.forName(driver);
+			//Make connection
+			conn = DriverManager.getConnection(url, userName, password);
+			//Make query
+			String sql = "SELECT *\r\n"
+					+ "FROM DEVELOPER\r\n"
+					+ "WHERE SSN=" + SSN
+					;
+			stmnt = conn.createStatement();
+			rs = stmnt.executeQuery(sql);
+			while (rs.next())
+			{
+				obj.SSN = rs.getString(1);
+				obj.GameID = rs.getString(2);
+			}
+			//Close connections
+		} catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		finally 
+		{
+			try 
+			{
+				if(rs !=null) rs.close();
+				if(stmnt !=null) stmnt.close();
+				if(conn !=null) conn.close();
+			}
+			catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+		return obj;
+	}
+	
 	public void UpdateGame(Game obj)
 	{
 		ResultSet rs = null;
@@ -189,4 +339,3 @@ public class DBConnect {
 		}
 	}
 }
-
