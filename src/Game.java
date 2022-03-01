@@ -1,5 +1,3 @@
-package Project4Files;
-
 public class Game {
 	String gameID;
 	String pageViews;

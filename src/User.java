@@ -1,5 +1,3 @@
-package Project4Files;
-
 public class User extends Person {
 	String EndUserName;
 	String AdminFlag;

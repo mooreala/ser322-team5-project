@@ -1,5 +1,3 @@
-package Project4Files;
-
 public class Developer {
 	String SSN;
 	String GameID;

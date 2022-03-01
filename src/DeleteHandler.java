@@ -1,4 +1,3 @@
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -9,9 +8,9 @@ public class DeleteHandler {
     private Connection conn;
     private Scanner input;
 
-    public DeleteHandler(Connection conn, Scanner scan) {
-        this.conn = conn;
-        this.input = scan;
+    public DeleteHandler(DBConnect db) {
+        this.conn = db.getConn();
+        this.input = new Scanner(System.in);
     }
 
     public void constructDelete() {

@@ -1,5 +1,3 @@
-package Project4Files;
-
 public class GameSales {
 	String GameID;
 	String Month;

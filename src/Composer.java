@@ -1,5 +1,3 @@
-package Project4Files;
-
 public class Composer {
 	String SSN;
 	String GameID;

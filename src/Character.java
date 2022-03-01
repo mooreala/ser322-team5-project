@@ -1,5 +1,3 @@
-package Project4Files;
-
 public class Character {
 	String name;
 	int GameID;
