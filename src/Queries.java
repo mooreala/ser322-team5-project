@@ -1,34 +1,62 @@
 import java.sql.*;
 import java.text.DecimalFormat;
+import java.util.Scanner;
 
 public class Queries {
-    public static void main(String[] args){
-        System.out.println("Beginning Program");
 
-        if(args[4].equals("query1")) {
-            queryListAllGames(args[0], args[1], args[2]);
-        }
-        else if (args[4].equals("query2")) {
-            queryListSpecificGameInfo(args[0], args[1], args[2], args[5]);
-        }
-        else if (args[4].equals("query3")) {
-            queryListSpecificGameDataWithAdditionalInfo(args[0], args[1], args[2], args[5]);
-        }
-        else if (args[4].equals("query4")) {
-            queryGamesForSpecificCharacter(args[0], args[1], args[2], args[5]);
-        }
-        else if (args[4].equals("query5")) {
-            queryCharactersInGame(args[0], args[1], args[2], args[5]);
-        }
-        else if (args[4].equals("query6")) {
-            queryListSpecificGameSales(args[0], args[1], args[2], args[5]);
-        }
+    public static void queryMenu(DBConnect db) {
+        System.out.println("----Query Menu----");
+        System.out.println("Select Query #:");
+        System.out.println("1) List all Games and Information");
+        System.out.println("2) List Game and Information For Specific Game Title");
+        System.out.println("3) List Game, Publisher, Developer and Composer for Specific Game title");
+        System.out.println("4) List all games a specific character");
+        System.out.println("5) List all characters in a specific game");
+        System.out.println("6) Games sales for Specific Game title");
 
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Select Query #: ");
+        int num = scan.nextInt();
+        if(num == 1) {
+            queryListAllGames(db);
+        }
+        else if (num == 2) {
+            System.out.print("Game title to search: ");
+            Scanner scan2 = new Scanner(System.in);
+            String gameTitleSearch = scan2.nextLine();
+            queryListSpecificGameInfo(db, gameTitleSearch);
+        }
+        else if (num == 3) {
+            System.out.print("Game title to search: ");
+            Scanner scan3 = new Scanner(System.in);
+            String gameTitleSearch = scan3.nextLine();
+            queryListSpecificGameDataWithAdditionalInfo(db, gameTitleSearch);
+        }
+        else if (num == 4) {
+            System.out.print("Character to search: ");
+            Scanner scan4 = new Scanner(System.in);
+            String gameCharacterSearch = scan4.nextLine();
+            queryGamesForSpecificCharacter(db, gameCharacterSearch);
+        }
+        else if (num == 5) {
+            System.out.print("Game title to search: ");
+            Scanner scan5 = new Scanner(System.in);
+            String gameTitleSearch = scan5.nextLine();
+            queryCharactersInGame(db, gameTitleSearch);
+        }
+        else if (num == 6) {
+            System.out.print("Game title to search: ");
+            Scanner scan6 = new Scanner(System.in);
+            String gameTitleSearch = scan6.nextLine();
+            queryListSpecificGameSales(db, gameTitleSearch);
+        }
+        else {
+            System.out.println("Error unknown input");
+        }
     }
 
-    public static void queryListAllGames(String url, String username, String password){
+    public static void queryListAllGames(DBConnect db){
         try {
-            Connection connection = DriverManager.getConnection(url, username, password);
             System.out.println("Query-> List all Games and Information");
             System.out.println();
             String sql = "SELECT \n" +
@@ -40,7 +68,7 @@ public class Queries {
                     "RETAILERS\n" +
                     " FROM game\n" +
                     " where APPROVED_FLAG = 1";
-            Statement statement = connection.createStatement();
+            Statement statement = db.conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
 
             System.out.println("[Game Title]                             [Genre]         [Rating]   [Score] [Platform] [Retailers]");
@@ -60,7 +88,6 @@ public class Queries {
             statement.execute(sql);
             result.close();
             statement.close();
-            connection.close();
 
         } catch (SQLException e) {
             System.out.println("Error cannot connect");
@@ -68,9 +95,8 @@ public class Queries {
         }
     }
 
-    public static void queryListSpecificGameInfo(String url, String username, String password, String gameTitleSearch){
+    public static void queryListSpecificGameInfo(DBConnect db, String gameTitleSearch){
         try {
-            Connection connection = DriverManager.getConnection(url, username, password);
             System.out.println("Query-> List Game and Information For Specific Game Title like: " + gameTitleSearch);
             System.out.println();
             String sql = "SELECT \n" +
@@ -83,7 +109,7 @@ public class Queries {
                     "PLOT\n" +
                     " FROM game\n" +
                     " where APPROVED_FLAG = 1 and TITLE like '%" + gameTitleSearch + "%'";
-            Statement statement = connection.createStatement();
+            Statement statement = db.conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
 
             while(result.next()) {
@@ -105,7 +131,6 @@ public class Queries {
             statement.execute(sql);
             result.close();
             statement.close();
-            connection.close();
 
         } catch (SQLException e) {
             System.out.println("Error cannot connect");
@@ -114,9 +139,8 @@ public class Queries {
     }
 
 
-    public static void queryListSpecificGameDataWithAdditionalInfo(String url, String username, String password, String gameTitleSearch){
+    public static void queryListSpecificGameDataWithAdditionalInfo(DBConnect db, String gameTitleSearch){
         try {
-            Connection connection = DriverManager.getConnection(url, username, password);
             System.out.println("Query-> List Game, Publisher, Developer and Composer for Specific Game title like: " + gameTitleSearch);
             System.out.println();
             String sql = "SELECT \n" +
@@ -138,7 +162,7 @@ public class Queries {
                     "left outer join person as DeveloperInfo on developer.SSN = DeveloperInfo.SSN\n" +
                     " where APPROVED_FLAG = 1 and TITLE like '%" + gameTitleSearch + "%'";
 
-            Statement statement = connection.createStatement();
+            Statement statement = db.conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
 
             while(result.next()) {
@@ -166,7 +190,6 @@ public class Queries {
             statement.execute(sql);
             result.close();
             statement.close();
-            connection.close();
 
         } catch (SQLException e) {
             System.out.println("Error cannot connect");
@@ -174,9 +197,8 @@ public class Queries {
         }
     }
 
-    public static void queryGamesForSpecificCharacter(String url, String username, String password, String gameCharacterSearch){
+    public static void queryGamesForSpecificCharacter(DBConnect db, String gameCharacterSearch){
         try {
-            Connection connection = DriverManager.getConnection(url, username, password);
             System.out.println("Query-> List all games a specific character is in like: " + gameCharacterSearch);
             System.out.println();
             String sql = "SELECT\n" +
@@ -186,7 +208,7 @@ public class Queries {
                     "left outer join game on character_in_game.GAME_ID = game.GAME_ID\n" +
                     "where character_in_game.C_NAME like '%" + gameCharacterSearch + "%'";
 
-            Statement statement = connection.createStatement();
+            Statement statement = db.conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
 
             while(result.next()) {
@@ -200,7 +222,6 @@ public class Queries {
             statement.execute(sql);
             result.close();
             statement.close();
-            connection.close();
 
         } catch (SQLException e) {
             System.out.println("Error cannot connect");
@@ -208,10 +229,9 @@ public class Queries {
         }
     }
 
-    public static void queryCharactersInGame(String url, String username, String password, String gameGameSearch){
+    public static void queryCharactersInGame(DBConnect db, String gameGameSearch){
         try {
-            Connection connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Query-> List all games a specific character is in like: " + gameGameSearch);
+            System.out.println("Query-> List all characters in a specific game like: " + gameGameSearch);
             System.out.println();
             String sql = "SELECT\n" +
                     "game.TITLE,\n" +
@@ -220,7 +240,7 @@ public class Queries {
                     "left outer join character_in_game on character_in_game.GAME_ID = game.GAME_ID\n" +
                     "where game.TITLE like '%" + gameGameSearch + "%'";
 
-            Statement statement = connection.createStatement();
+            Statement statement = db.conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
 
             while(result.next()) {
@@ -233,7 +253,6 @@ public class Queries {
             statement.execute(sql);
             result.close();
             statement.close();
-            connection.close();
 
         } catch (SQLException e) {
             System.out.println("Error cannot connect");
@@ -241,10 +260,9 @@ public class Queries {
         }
     }
 
-    public static void queryListSpecificGameSales(String url, String username, String password, String gameTitleSearch){
+    public static void queryListSpecificGameSales(DBConnect db, String gameTitleSearch){
         try {
-            Connection connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Query-> List Game, Publisher, Developer and Composer for Specific Game title like: " + gameTitleSearch);
+            System.out.println("Query-> Games sales for Specific Game title like: " + gameTitleSearch);
             System.out.println();
             String sql = "SELECT \n" +
                     "game.TITLE,\n" +
@@ -256,7 +274,7 @@ public class Queries {
                     "inner join game_sales on game.GAME_ID = game_sales.GAME_ID\n" +
                     " where TITLE like '%" + gameTitleSearch + "%'";
 
-            Statement statement = connection.createStatement();
+            Statement statement = db.conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
             System.out.println("[Game Title]                             [Month]  [Sales]     [Running Total]");
             while(result.next()) {
@@ -277,7 +295,6 @@ public class Queries {
             statement.execute(sql);
             result.close();
             statement.close();
-            connection.close();
 
         } catch (SQLException e) {
             System.out.println("Error cannot connect");

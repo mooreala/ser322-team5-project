@@ -77,6 +77,11 @@ public class CLIMenu {
 	}
 	
 	private void Command(String selection) throws IOException {
+		if(selection.equalsIgnoreCase("Query")) {
+			Queries.queryMenu(db);
+			MainMenuDisplay();
+		}
+		else {
 		System.out.println("Select which object to " + selection.toUpperCase() + ":");
 		System.out.print(Game.Command() + Person.Command() + User.Command() + Character.Command() + Composer.Command());
 		DisplayExit();
@@ -118,11 +123,11 @@ public class CLIMenu {
 			default:
 				System.out.println("--Invalid Command--");
 				MainMenuDisplay();
-		}
+		} }
 	}
 
 	private void InsertPersonMenu() throws IOException {
-		
+		/*
 		System.out.print("Format [SSN] [FIRST NAME] [LAST NAME] [DOB MM-DD-YYYY]\nType person information:");
 		input = reader.readLine();
 		String[] values = input.split(" ");
@@ -138,7 +143,7 @@ public class CLIMenu {
 		obj.lastName = values[2];
 		obj.DOB = values[3];
 		System.out.println("TODO Insert Person");
-		
+
 			ssn = obj.SSN;
 			String firstName = obj.firstName;
 			String lastName = obj.lastName;
@@ -146,10 +151,11 @@ public class CLIMenu {
 			String fullName = obj.getFullName();
 
 			insert.executeUpdate("INSERT INTO PERSON" + "VALUES (SSN, firstName, lastName, dob, fullName)");
-		
+		*/
 	}
 	private void UpdatePersonMenu(String SSN) throws IOException
 	{
+	/*
 		//Need to check if SSN is valid and pull data from DB
 		Person obj = new Person();
 		System.out.println("Select attribute to update or press enter to execute changes:");
@@ -201,11 +207,12 @@ public class CLIMenu {
 			default:
 				System.out.println(invalid);
 		}
-		UpdatePersonMenu(SSN);
+		UpdatePersonMenu(SSN);*/
 	}
 
 	
 	private void InsertGameMenu() throws IOException {
+		/*
 		System.out.print("Format [GAME_ID] [PAGE_VIEWS] [GENRE] [SCORE] [PLOT] [RETAILERS] [PLATFORM] [RATING] [TITLE]\nType game information:");
 		input = reader.readLine();
 		String[] values = input.split(" ");
@@ -242,9 +249,9 @@ public class CLIMenu {
 
 			insert.executeUpdate("INSERT INTO GAME"
 					+ "VALUES (gameID, pageViews, genre, score, plot, retailers, platform, rating, title)");
-
+*/
 	}
-	private void UpdateGameMenu(Game obj) throws IOException {
+	private void UpdateGameMenu(Game obj) throws IOException {/*
 		//Need to check if SSN is valid and pull data from DB
 				System.out.println("Select attribute to update or press enter to execute changes:");
 				Game.ListAttributes();
@@ -323,7 +330,7 @@ public class CLIMenu {
 		obj.EndUserName = values[0];	
 		obj.AdminFlag = values[1];
 		obj.SSN = values[2];
-		//TODO
+		//TODO*/
 	}
 	private void UpdateUserMenu(User obj) throws IOException
 	{
@@ -358,7 +365,7 @@ public class CLIMenu {
 		UpdateUserMenu(obj);
 	}
 	
-	private void InsertCharacterMenu() throws IOException {
+	private void InsertCharacterMenu() throws IOException {/*
 		System.out.print("Format [NAME] [GAME_ID]\nType game information:");
 		input = reader.readLine();
 		String[] values = input.split(" ");
@@ -370,11 +377,11 @@ public class CLIMenu {
 		}
 		Character obj = new Character();
 		obj.name = values[0];	
-		obj.GameID = values[1];
+		obj.GameID = values[1];*/
 		//TODO
 	}
 	private void UpdateCharacterMenu(Character obj) throws IOException
-	{
+	{/*
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Character.ListAttributes();
 		System.out.print("Selection:");
@@ -398,7 +405,7 @@ public class CLIMenu {
 			default:
 				System.out.println(invalid);
 		}
-		UpdateCharacterMenu(obj);
+		UpdateCharacterMenu(obj);*/
 	}
 	
 	private void InsertDeveloperMenu() throws IOException {
@@ -417,7 +424,7 @@ public class CLIMenu {
 		//TODO
 	}
 	private void UpdateDeveloperMenu(Developer obj) throws IOException
-	{
+	{/*
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Developer.ListAttributes();
 		System.out.print("Selection:");
@@ -441,7 +448,7 @@ public class CLIMenu {
 			default:
 				System.out.println(invalid);
 		}
-		UpdateDeveloperMenu(obj);
+		UpdateDeveloperMenu(obj); */
 	}
 
 	private void InsertComposerMenu() throws IOException {
