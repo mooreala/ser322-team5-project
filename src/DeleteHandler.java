@@ -15,17 +15,24 @@ public class DeleteHandler {
 
     public void constructDelete() {
         PreparedStatement stmt;
-        String delete = "DELETE FROM ";
+        String delete = "";
         int dataSelect = 0;
-
-        /* get information about deletion */
-        System.out.println("Please choose data type to delete:");
-        System.out.println("1 - Game\n2 - Character\n3 - Game Sales\n4 - Person\n0 - Return to main menu");
 
         boolean quit = false;
         while (!quit) {
+
+            /* get information about deletion */
+            System.out.println("Please choose data type to delete:");
+            System.out.println("1 - Game\n2 - Character\n3 - Game Sales\n4 - Person\n0 - Return to main menu");
+
             try {
-                dataSelect = input.nextInt();
+                try {
+                    dataSelect = input.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("Selection must be an integer. Try again!!\n");
+                    input.next();
+                    continue;
+                }
 
                 switch (dataSelect) {
                     case 0:
@@ -34,7 +41,7 @@ public class DeleteHandler {
                         break;
                 /* CASE 1 *********************************************************************************************************************************/
                     case 1:
-                        delete += "GAME, CHARACTER_IN_GAME, GAME_SALES, PUBLISHER, DEVELOPER, COMPOSER WHERE GAMEID=?";
+                        delete = "DELETE FROM GAME WHERE GAME_ID=?";
                         stmt = conn.prepareStatement(delete);
 
                         /* get gameID */
@@ -44,6 +51,7 @@ public class DeleteHandler {
                             gameId = input.nextInt();
                         } catch (InputMismatchException e) {
                             System.out.println("Invalid gameID input. Try again.");
+                            input.next();
                             break;
                         }
 
@@ -55,7 +63,7 @@ public class DeleteHandler {
                             }
 
                             stmt.setInt(1, gameId);
-                            stmt.executeQuery();
+                            stmt.execute();
                             System.out.println("Game with gameId " + gameId + " has been succesfully deleted.");
                         } catch (SQLException e) {
                             System.out.println("Unable to execute query. Try again.");
@@ -64,14 +72,14 @@ public class DeleteHandler {
                         break;
                 /* CASE 2 *********************************************************************************************************************************/
                     case 2:
-                        delete += "CHARACTER_IN_GAME WHERE C_NAME=?";
+                        delete = "DELETE FROM CHARACTER_IN_GAME WHERE C_NAME=?";
                         stmt = conn.prepareStatement(delete);
 
                         /* get character name */
                         String c_name = null;
                         try {
                             System.out.println("Please enter <String> character name:");
-                            c_name = input.nextLine();
+                            c_name = input.next();
                         } catch (Exception e) {
                             System.out.println("Error grabbing character name information. Try again.");
                             break;
@@ -85,7 +93,7 @@ public class DeleteHandler {
                             }
 
                             stmt.setString(1, c_name);
-                            stmt.executeQuery();
+                            stmt.execute();
                             System.out.println("Character with name " + c_name + " has been successfully deleted.");
                         } catch (SQLException e) {
                             System.out.println("Unable to execute query. Try again.");
@@ -94,7 +102,7 @@ public class DeleteHandler {
                         break;
                 /* CASE 3 *********************************************************************************************************************************/
                     case 3:
-                        delete += "GAME_SALES WHERE GAMEID=?AND M_MONTH=? AND Y_YEAR=?";
+                        delete = "DELETE FROM GAME_SALES WHERE GAME_ID=? AND M_MONTH=? AND Y_YEAR=?";
                         stmt = conn.prepareStatement(delete);
 
                         /* get gameId */
@@ -110,6 +118,7 @@ public class DeleteHandler {
                             year = input.nextInt();
                         } catch (InputMismatchException e) {
                             System.out.println("Error processing input information, expected data is <int>. Try again.");
+                            input.next();
                             break;
                         }
 
@@ -123,7 +132,7 @@ public class DeleteHandler {
                             stmt.setInt(1, saleId);
                             stmt.setInt(2, month);
                             stmt.setInt(3, year);
-                            stmt.executeQuery();
+                            stmt.execute();
                             System.out.println("Sales information for game with ID " + saleId + " month " + month + "year " + " has been successfully deleted.");
                         } catch (SQLException e) {
                             System.out.println("Unable to execute query. Try again.");
@@ -132,7 +141,7 @@ public class DeleteHandler {
                         break;
                 /* CASE 4 *********************************************************************************************************************************/
                     case 4:
-                        delete += "PERSON, END_USER, COMPOSER, PUBLISHER, DEVELOPER WHERE SSN=?"; 
+                        delete = "DELETE FROM PERSON WHERE SSN=?"; 
                         stmt = conn.prepareStatement(delete);
 
                         /* get ssn */
@@ -142,6 +151,7 @@ public class DeleteHandler {
                             ssn = input.nextInt();
                         } catch (InputMismatchException e) {
                             System.out.println("Invalid ssn input. Try again.");
+                            input.next();
                             break;
                         }
 
@@ -153,7 +163,7 @@ public class DeleteHandler {
                             }
 
                             stmt.setInt(1, ssn);
-                            stmt.executeQuery();
+                            stmt.execute();
                             System.out.println("Person with associated ssn " + ssn + " has been successfully deleted.");
                         } catch (SQLException e) {
                             System.out.println("Unable to execute query. Try again.");
@@ -163,14 +173,11 @@ public class DeleteHandler {
                 /* DEFAULT *********************************************************************************************************************************/
                     default:
                         System.out.println("Please select a valid selection...\n");
-                        System.out.println("1 - Game\n2 - Character\n3 - Game Sales\n4 - Person");
                         break;
                 }
-
-            } catch (InputMismatchException e) {
-                System.out.println("Please enter an integer selection.");
             } catch (SQLException e) {
                 System.out.println("Unexpected error with built deletion query. Try again...");
+                e.printStackTrace();
             }
         }
         return;

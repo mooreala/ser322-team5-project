@@ -37,7 +37,7 @@ public class CLIMenu {
             System.exit(1);
         } 
 		System.out.println("Connection to DB Succesfull!");
-        
+
         dHandler = new DeleteHandler(db);
 	}
 	
@@ -71,6 +71,7 @@ public class CLIMenu {
 			break;
 		case "X":
 			System.out.println("Program terminated...");
+            db.CloseConnection();
 			System.exit(0);
 			break;
 			default:
