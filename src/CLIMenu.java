@@ -309,6 +309,281 @@ public class CLIMenu {
 				UpdateGameMenu(obj);
 	}
 
+		private void InsertUserMenu() throws IOException {
+		System.out.print("Format [USER_NAME] [ADMIN_FLAG] [SSN]\nType game information:");
+		input = reader.readLine();
+		String[] values = input.split(" ");
+		if(values.length != 3)
+		{
+			System.out.println(invalid);
+			InsertUserMenu();
+			return;
+		}
+		User obj = new User();
+		obj.EndUserName = values[0];	
+		obj.AdminFlag = values[1];
+		obj.SSN = values[2];
+		//TODO
+	}
+	private void UpdateUserMenu(User obj) throws IOException
+	{
+		System.out.println("Select attribute to update or press enter to execute changes:");
+		User.ListAttributes();
+		System.out.print("Selection:");
+		input = reader.readLine();//Which attribute to edit
+		//Update Object value and loop
+		switch (input) {
+		case "":
+			//TODO UPDATE The obj is passed as argument
+			MainMenuDisplay();
+			return;
+		case "1":
+			System.out.print("New User Name:");
+			input = reader.readLine();
+			obj.SSN = input;
+			break;
+		case "2":
+			System.out.print("Approved Flag:");
+			input = reader.readLine();
+			obj.firstName = input;
+			break;
+		case "3":
+			System.out.print("New SSN:");
+			input = reader.readLine();
+			obj.lastName = input;
+			break;
+			default:
+				System.out.println(invalid);
+		}
+		UpdateUserMenu(obj);
+	}
+	
+	private void InsertCharacterMenu() throws IOException {
+		System.out.print("Format [NAME] [GAME_ID]\nType game information:");
+		input = reader.readLine();
+		String[] values = input.split(" ");
+		if(values.length != 2)
+		{
+			System.out.println(invalid);
+			InsertCharacterMenu();
+			return;
+		}
+		Character obj = new Character();
+		obj.name = values[0];	
+		obj.GameID = values[1];
+		//TODO
+	}
+	private void UpdateCharacterMenu(Character obj) throws IOException
+	{
+		System.out.println("Select attribute to update or press enter to execute changes:");
+		Character.ListAttributes();
+		System.out.print("Selection:");
+		input = reader.readLine();//Which attribute to edit
+		//Update Object value and loop
+		switch (input) {
+		case "":
+			//TODO UPDATE The obj is passed as argument
+			MainMenuDisplay();
+			return;
+		case "1":
+			System.out.print("New Character Name:");
+			input = reader.readLine();
+			obj.name = input;
+			break;
+		case "2":
+			System.out.print("Game_ID:");
+			input = reader.readLine();
+			obj.GameID = input;
+			break;
+			default:
+				System.out.println(invalid);
+		}
+		UpdateCharacterMenu(obj);
+	}
+	
+	private void InsertDeveloperMenu() throws IOException {
+		System.out.print("Format [SSN] [GAME_ID]\nType game information:");
+		input = reader.readLine();
+		String[] values = input.split(" ");
+		if(values.length != 2)
+		{
+			System.out.println(invalid);
+			InsertDeveloperMenu();
+			return;
+		}
+		Developer obj = new Developer();
+		obj.SSN = values[0];	
+		obj.GameID = values[1];
+		//TODO
+	}
+	private void UpdateDeveloperMenu(Developer obj) throws IOException
+	{
+		System.out.println("Select attribute to update or press enter to execute changes:");
+		Developer.ListAttributes();
+		System.out.print("Selection:");
+		input = reader.readLine();//Which attribute to edit
+		//Update Object value and loop
+		switch (input) {
+		case "":
+			//TODO UPDATE The obj is passed as argument
+			MainMenuDisplay();
+			return;
+		case "1":
+			System.out.print("New SSN:");
+			input = reader.readLine();
+			obj.SSN = input;
+			break;
+		case "2":
+			System.out.print("New Game_ID:");
+			input = reader.readLine();
+			obj.GameID = input;
+			break;
+			default:
+				System.out.println(invalid);
+		}
+		UpdateDeveloperMenu(obj);
+	}
+
+	private void InsertComposerMenu() throws IOException {
+		System.out.print("Format [SSN] [GAMEID]\nType game information:");
+		input = reader.readLine();
+		String[] values = input.split(" ");
+		if(values.length != 3)
+		{
+			System.out.println(invalid);
+			InsertComposerMenu();
+			return;
+		}
+		Composer obj = new Composer();
+		obj.SSN = values[0];	
+		obj.GameID = values[1];
+		//TODO
+	}
+	private void UpdateComposerMenu(Composer obj) throws IOException
+	{
+		System.out.println("Select attribute to update or press enter to execute changes:");
+		Composer.ListAttributes();
+		System.out.print("Selection:");
+		input = reader.readLine();//Which attribute to edit
+		//Update Object value and loop
+		switch (input) {
+		case "":
+			//TODO UPDATE The obj is passed as argument
+			MainMenuDisplay();
+			return;
+		case "1":
+			System.out.print("New SSN:");
+			input = reader.readLine();
+			obj.SSN = input;
+			break;
+		case "2":
+			System.out.print("GameID:");
+			input = reader.readLine();
+			obj.GameID = input;
+			break;
+			default:
+				System.out.println(invalid);
+		}
+		UpdateComposerMenu(obj);
+	}
+	
+	private void InsertGameSalesMenu() throws IOException {
+		System.out.print("Format [GAMEID] [MONTH] [YEAR] [AMOUNT]\nType game information:");
+		input = reader.readLine();
+		String[] values = input.split(" ");
+		if(values.length != 3)
+		{
+			System.out.println(invalid);
+			InsertGameSalesMenu();
+			return;
+		}
+		GameSales obj = new GameSales();
+		obj.GameID = values[0];	
+		obj.Month = values[0];	
+		obj.Year = values[0];	
+		obj.Amount = values[1];
+		//TODO
+	}
+	private void UpdateGameSalesMenu(GameSales obj) throws IOException
+	{
+		System.out.println("Select attribute to update or press enter to execute changes:");
+		GameSales.ListAttributes();
+		System.out.print("Selection:");
+		input = reader.readLine();//Which attribute to edit
+		//Update Object value and loop
+		switch (input) {
+		case "":
+			//TODO UPDATE The obj is passed as argument
+			MainMenuDisplay();
+			return;
+		case "1":
+			System.out.print("New GameID:");
+			input = reader.readLine();
+			obj.GameID = input;
+			break;
+		case "2":
+			System.out.print("New Month:");
+			input = reader.readLine();
+			obj.Month = input;
+			break;
+		case "3":
+			System.out.print("New Year:");
+			input = reader.readLine();
+			obj.Year = input;
+			break;
+		case "4":
+			System.out.print("New Amount:");
+			input = reader.readLine();
+			obj.Amount = input;
+			break;
+			default:
+				System.out.println(invalid);
+		}
+		UpdateGameSalesMenu(obj);
+	}
+	
+	private void InsertPublisherMenu() throws IOException {
+		System.out.print("Format [COMPANY NAME] [GAME_ID]\nType game information:");
+		input = reader.readLine();
+		String[] values = input.split(" ");
+		if(values.length != 2)
+		{
+			System.out.println(invalid);
+			InsertPublisherMenu();
+			return;
+		}
+		Publisher obj = new Publisher();
+		obj.CompanyName = values[0];	
+		obj.GameID = values[1];
+		//TODO
+	}
+	private void UpdatePublisherMenu(Publisher obj) throws IOException
+	{
+		System.out.println("Select attribute to update or press enter to execute changes:");
+		Publisher.ListAttributes();
+		System.out.print("Selection:");
+		input = reader.readLine();//Which attribute to edit
+		//Update Object value and loop
+		switch (input) {
+		case "":
+			//TODO UPDATE The obj is passed as argument
+			MainMenuDisplay();
+			return;
+		case "1":
+			System.out.print("New Company Name:");
+			input = reader.readLine();
+			obj.CompanyName = input;
+			break;
+		case "2":
+			System.out.print("New Game_ID:");
+			input = reader.readLine();
+			obj.GameID = input;
+			break;
+			default:
+				System.out.println(invalid);
+		}
+		UpdatePublisherMenu(obj);
+	}
 	
 	
 	private void DisplayExit() {
