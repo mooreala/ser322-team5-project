@@ -173,5 +173,6 @@ public class DeleteHandler {
                 System.out.println("Unexpected error with built deletion query. Try again...");
             }
         }
+        return;
     }
 }

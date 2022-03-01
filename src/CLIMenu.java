@@ -10,6 +10,7 @@ public class CLIMenu {
 	private  BufferedReader reader;
 	public int actionType;
 	public static DBConnect db;
+    public static DeleteHandler dHandler;
 	public static boolean connected = false;
 	public String invalid = "--Invalid Data - Try Again--";
 	public static void main(String[] args) throws IOException {
@@ -35,7 +36,9 @@ public class CLIMenu {
             System.out.println("Connection to database failed. Aborting...");
             System.exit(1);
         } 
-		System.out.println("Connection to DB Succesfull!");		
+		System.out.println("Connection to DB Succesfull!");
+        
+        dHandler = new DeleteHandler(db);
 	}
 	
 	private void MainMenuDisplay() throws IOException
@@ -56,8 +59,8 @@ public class CLIMenu {
 			Command("Update");
 			break;
 		case "D":
-			//actionType = 3;
-			//Call Delete
+			dHandler.constructDelete();
+            MainMenuDisplay();
 			break;
 		case "Q":
 			actionType = 4;
