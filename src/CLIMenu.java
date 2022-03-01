@@ -1,5 +1,3 @@
-package Project4Files;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,8 +29,13 @@ public class CLIMenu {
 		input = reader.readLine();
 		String[] array = input.split(" ");
 		 db = new DBConnect(array[0],array[1],array[2],array[3]);
+
+        db.Connection();
+        if (db.getConn() == null) {
+            System.out.println("Connection to database failed. Aborting...");
+            System.exit(1);
+        } 
 		System.out.println("Connection to DB Succesfull!");		
-		
 	}
 	
 	private void MainMenuDisplay() throws IOException
