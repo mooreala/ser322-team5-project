@@ -14,11 +14,6 @@ public class CLIMenu {
 	public static boolean connected = false;
 	public String invalid = "--Invalid Data - Try Again--";
 
-	String url;
-	String userName;
-	String password;
-	String driver;
-
 	public static void main(String[] args) throws IOException, SQLException {
 
 		if (connected) {
@@ -83,139 +78,140 @@ public class CLIMenu {
 	}
 
 	private void Command(String selection) throws IOException, SQLException {
-		if(selection.equalsIgnoreCase("Query")) {
+		if (selection.equalsIgnoreCase("Query")) {
 			Queries.queryMenu(db);
 			MainMenuDisplay();
+		} else {
+			System.out.println("Select which object to " + selection.toUpperCase() + ":");
+			System.out.print(
+					Game.Command() + Person.Command() + User.Command() + Character.Command() + Composer.Command());
+			DisplayExit();
+			input = reader.readLine();
+			switch (input.toUpperCase()) {
+			case "P":
+				switch (actionType) {
+				case 1:
+					InsertPersonMenu();
+					break;
+				case 2:
+					System.out.print("Type Person SSN:");
+					input = reader.readLine();
+					User obj = new User();
+					obj = db.QueryUser(input);
+					UpdatePersonMenu(obj);
+					break;
+				}
+				break;
+			case "G":
+				switch (actionType) {
+				case 1:
+					InsertGameMenu();
+					break;
+				case 2:
+					System.out.print("Type Game ID:");
+					input = reader.readLine();
+					Game obj = new Game();
+					obj = db.QueryGame(input);
+					UpdateGameMenu(obj);
+					break;
+				}
+				break;
+			case "U":
+				switch (actionType) {
+				case 1:
+					InsertUserMenu();
+					break;
+				case 2:
+					System.out.print("Type User SSN:");
+					input = reader.readLine();
+					User obj = new User();
+					obj = db.QueryUser(input);
+					UpdateUserMenu(obj);
+					break;
+				}
+				break;
+			case "C":
+				switch (actionType) {
+				case 1:
+					InsertCharacterMenu();
+					break;
+				case 2:
+					System.out.print("Type GameID:");
+					input = reader.readLine();
+					Character obj = new Character();
+					obj = db.QueryCharacter(input);
+					UpdateCharacterMenu(obj);
+					break;
+				}
+				break;
+			case "D":
+				switch (actionType) {
+				case 1:
+					InsertDeveloperMenu();
+					break;
+				case 2:
+					System.out.print("Type GameID:");
+					input = reader.readLine();
+					Developer obj = new Developer();
+					obj = db.QueryDeveloper(input);
+					UpdateDeveloperMenu(obj);
+					break;
+				}
+				break;
+			case "CO":
+				switch (actionType) {
+				case 1:
+					InsertComposerMenu();
+					break;
+				case 2:
+					System.out.print("Type GameID:");
+					input = reader.readLine();
+					Composer obj = new Composer();
+					obj = db.QueryComposer(input);
+					UpdateComposerMenu(obj);
+					break;
+				}
+				break;
+			case "GS":
+				switch (actionType) {
+				case 1:
+					InsertGameSalesMenu();
+					break;
+				case 2:
+					System.out.print("Type GameID:");
+					input = reader.readLine();
+					GameSales obj = new GameSales();
+					obj = db.QueryGameSales(input);
+					UpdateGameSalesMenu(obj);
+					break;
+				}
+				break;
+			case "PU":
+				switch (actionType) {
+				case 1:
+					InsertPublisherMenu();
+					break;
+				case 2:
+					System.out.print("Type GameID:");
+					input = reader.readLine();
+					Publisher obj = new Publisher();
+					obj = db.QueryPublisher(input);
+					UpdatePublisherMenu(obj);
+					break;
+				}
+				break;
+			case "M":
+				MainMenuDisplay();
+				break;
+			case "X":
+				System.out.println("Program terminated...");
+				System.exit(0);
+				break;
+			default:
+				System.out.println("--Invalid Command--");
+				MainMenuDisplay();
+			}
 		}
-		else {
-		System.out.println("Select which object to " + selection.toUpperCase() + ":");
-		System.out.print(Game.Command() + Person.Command() + User.Command() + Character.Command() + Composer.Command());
-		DisplayExit();
-		input = reader.readLine();
-		switch (input.toUpperCase()) {
-		case "P":
-			switch (actionType) {
-			case 1:
-				InsertPersonMenu();
-				break;
-			case 2:
-				System.out.print("Type Person SSN:");
-				input = reader.readLine();
-				User obj = new User();
-				obj = db.QueryUser(input);
-				UpdatePersonMenu(obj);
-				break;
-			}
-			break;
-		case "G":
-			switch (actionType) {
-			case 1:
-				InsertGameMenu();
-				break;
-			case 2:
-				System.out.print("Type Game ID:");
-				input = reader.readLine();
-				Game obj = new Game();
-				obj = db.QueryGame(input);
-				UpdateGameMenu(obj);
-				break;
-			}
-			break;
-		case "U":
-			switch (actionType) {
-			case 1:
-				InsertUserMenu();
-				break;
-			case 2:
-				System.out.print("Type User SSN:");
-				input = reader.readLine();
-				User obj = new User();
-				obj = db.QueryUser(input);
-				UpdateUserMenu(obj);
-				break;
-			}
-			break;
-		case "C":
-			switch (actionType) {
-			case 1:
-				InsertCharacterMenu();
-				break;
-			case 2:
-				System.out.print("Type GameID:");
-				input = reader.readLine();
-				Character obj = new Character();
-				obj = db.QueryCharacter(input);
-				UpdateCharacterMenu(obj);
-				break;
-			}
-			break;
-		case "D":
-			switch (actionType) {
-			case 1:
-				InsertDeveloperMenu();
-				break;
-			case 2:
-				System.out.print("Type GameID:");
-				input = reader.readLine();
-				Developer obj = new Developer();
-				obj = db.QueryDeveloper(input);
-				UpdateDeveloperMenu(obj);
-				break;
-			}
-			break;
-		case "CO":
-			switch (actionType) {
-			case 1:
-				InsertComposerMenu();
-				break;
-			case 2:
-				System.out.print("Type GameID:");
-				input = reader.readLine();
-				Composer obj = new Composer();
-				obj = db.QueryComposer(input);
-				UpdateComposerMenu(obj);
-				break;
-			}
-			break;
-		case "GS":
-			switch (actionType) {
-			case 1:
-				InsertGameSalesMenu();
-				break;
-			case 2:
-				System.out.print("Type GameID:");
-				input = reader.readLine();
-				GameSales obj = new GameSales();
-				obj = db.QueryGameSales(input);
-				UpdateGameSalesMenu(obj);
-				break;
-			}
-			break;
-		case "PU":
-			switch (actionType) {
-			case 1:
-				InsertPublisherMenu();
-				break;
-			case 2:
-				System.out.print("Type GameID:");
-				input = reader.readLine();
-				Publisher obj = new Publisher();
-				obj = db.QueryPublisher(input);
-				UpdatePublisherMenu(obj);
-				break;
-			}
-			break;
-		case "M":
-			MainMenuDisplay();
-			break;
-		case "X":
-			System.out.println("Program terminated...");
-			System.exit(0);
-			break;
-		default:
-			System.out.println("--Invalid Command--");
-			MainMenuDisplay();
-		} }
 	}
 
 	private void InsertPersonMenu() throws IOException, SQLException {
@@ -241,10 +237,11 @@ public class CLIMenu {
 		String dob = obj.DOB;
 		String fullName = obj.GetFullName();
 
-		Statement insert = db.conn.createStatement();
+		String sql = "INSERT INTO PERSON (SSN, FIRST_NAME, LAST_NAME, DOB) VALUES (" + ssn + ",'" + firstName + "','"
+				+ lastName + "','" + dob + "')";
 
-		insert.executeUpdate("INSERT INTO PERSON" + "VALUES (ssn, firstName, lastName, dob, fullName)");
-
+		Statement statement = db.conn.createStatement();
+		statement.executeUpdate(sql);
 	}
 
 	private void UpdatePersonMenu(Person obj) throws IOException, SQLException {
@@ -267,7 +264,7 @@ public class CLIMenu {
 			obj.SSN = input;
 
 			String ssn = obj.SSN;
-			updateStatement.executeUpdate("UPDATE PERSON SET SSN = ssn WHERE SSN=ssn");
+			updateStatement.executeUpdate("UPDATE PERSON SET SSN =  ssn WHERE SSN=ssn");
 			break;
 		case "2":
 			System.out.print("New First Name:");
@@ -337,10 +334,12 @@ public class CLIMenu {
 		String rating = obj.rating;
 		String title = obj.title;
 
-		Statement insert = db.conn.createStatement();
+		String sql = "INSERT INTO Game VALUES (GAME_ID, PAGE_VIEWS, APPROVED_FLAG, GENRE, SCORE, PLOT, RETAILERS, PLATFORM, RATING, TITLE) ("
+				+ gameID + ",'" + pageViews + "','" + approvedFlag + "','" + genre + "','" + score + "','" + plot
+				+ "','" + retailers + "','" + platform + "','" + rating + "','" + title + "' )";
 
-		insert.executeUpdate("INSERT INTO GAME"
-				+ "VALUES (gameID, pageViews, genre, score, plot, retailers, platform, rating, title)");
+		Statement statement = db.conn.createStatement();
+		statement.executeUpdate(sql);
 
 	}
 
@@ -428,9 +427,11 @@ public class CLIMenu {
 		String adminFlag = obj.AdminFlag;
 		String ssn = obj.SSN;
 
-		Statement insert = db.conn.createStatement();
+		String sql = "INSERT INTO END_USER (END_USER_NAME, ADMIN_FLAG, SSN) VALUES (" + endUserName + ",'" + adminFlag
+				+ "','" + ssn + "')";
 
-		insert.executeUpdate("INSERT INTO USER" + "VALUES (endUserName, adminFlag, ssn)");
+		Statement statement = db.conn.createStatement();
+		statement.executeUpdate(sql);
 	}
 
 	private void UpdateUserMenu(User obj) throws IOException, SQLException {
@@ -496,8 +497,10 @@ public class CLIMenu {
 		String cName = obj.name;
 		String gameID = obj.GameID;
 
-		Statement insert = db.conn.createStatement();
-		insert.executeUpdate("INSERT INTO CHARACTER_IN_GAME" + "VALUES (cName, gameID)");
+		String sql = "INSERT INTO CHARACTER_IN_GAME (C_NAME, GAME_ID) VALUES (" + cName + ",'" + gameID + "')";
+
+		Statement statement = db.conn.createStatement();
+		statement.executeUpdate(sql);
 	}
 
 	private void UpdateCharacterMenu(Character obj) throws IOException, SQLException {
@@ -553,9 +556,10 @@ public class CLIMenu {
 		String ssn = obj.SSN;
 		String gameID = obj.GameID;
 
-		Statement insert = db.conn.createStatement();
+		String sql = "INSERT INTO DEVELOPER (SSN, GAME_ID) VALUES (" + ssn + ",'" + gameID + "')";
 
-		insert.executeUpdate("INSERT INTO DEVELOPER" + "VALUES (ssn, gameID)");
+		Statement statement = db.conn.createStatement();
+		statement.executeUpdate(sql);
 	}
 
 	private void UpdateDeveloperMenu(Developer obj) throws IOException, SQLException {
@@ -612,9 +616,10 @@ public class CLIMenu {
 		String ssn = obj.SSN;
 		String gameID = obj.GameID;
 
-		Statement insert = db.conn.createStatement();
+		String sql = "INSERT INTO COMPOSER (SSN, GAME_ID) VALUES (" + ssn + ",'" + gameID + "')";
 
-		insert.executeUpdate("INSERT INTO COMPOSER" + "VALUES (ssn, gameID)");
+		Statement statement = db.conn.createStatement();
+		statement.executeUpdate(sql);
 	}
 
 	private void UpdateComposerMenu(Composer obj) throws IOException, SQLException {
@@ -673,9 +678,12 @@ public class CLIMenu {
 		String mMonth = obj.Month;
 		String yYear = obj.Year;
 		String amount = obj.Amount;
-		Statement insert = db.conn.createStatement();
 
-		insert.executeUpdate("INSERT INTO GAME_SALES" + "VALUES (gameID, mMonth, yYear, amount)");
+		String sql = "INSERT INTO GAME_SALES (GAME_ID, M_MONTH, Y_YEAR, AMOUNT) VALUES (" + gameID + ",'" + mMonth
+				+ "','" + yYear + "','" + amount + "')";
+
+		Statement statement = db.conn.createStatement();
+		statement.executeUpdate(sql);
 
 	}
 
@@ -754,9 +762,12 @@ public class CLIMenu {
 		String publishingCompanyName = obj.CompanyName;
 		String gameID = obj.GameID;
 
-		Statement insert = db.conn.createStatement();
+		String sql = "INSERT INTO PUBLISHER (PUBLISHING_COMPANY_NAME, GAME_ID, Y_YEAR, AMOUNT) VALUES ("
+				+ publishingCompanyName + ",'" + gameID + "')";
 
-		insert.executeUpdate("INSERT INTO PUBLISHER" + "VALUES (publishingCompanyName, gameID)");
+		Statement statement = db.conn.createStatement();
+		statement.executeUpdate(sql);
+
 	}
 
 	private void UpdatePublisherMenu(Publisher obj) throws IOException, SQLException {
