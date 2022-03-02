@@ -83,6 +83,11 @@ public class CLIMenu {
 	}
 
 	private void Command(String selection) throws IOException, SQLException {
+		if(selection.equalsIgnoreCase("Query")) {
+			Queries.queryMenu(db);
+			MainMenuDisplay();
+		}
+		else {
 		System.out.println("Select which object to " + selection.toUpperCase() + ":");
 		System.out.print(Game.Command() + Person.Command() + User.Command() + Character.Command() + Composer.Command());
 		DisplayExit();
@@ -210,7 +215,7 @@ public class CLIMenu {
 		default:
 			System.out.println("--Invalid Command--");
 			MainMenuDisplay();
-		}
+		} }
 	}
 
 	private void InsertPersonMenu() throws IOException, SQLException {
