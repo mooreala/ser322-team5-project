@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 //Program to connect to a database and display a looped command to edit DB
@@ -13,10 +14,13 @@ public class CLIMenu {
 	public static boolean connected = false;
 	public String invalid = "--Invalid Data - Try Again--";
 
-	Statement insert = conn.createStatement();
-	Statement updateStatement = conn.createStatement();
+	String url;
+	String userName;
+	String password;
+	String driver;
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, SQLException {
+
 		if (connected) {
 			new CLIMenu().MainMenuDisplay();
 		}
@@ -38,10 +42,10 @@ public class CLIMenu {
 			System.exit(1);
 		}
 		System.out.println("Connection to DB Succesfull!");
-        dHandler = new DeleteHandler(db);
+		dHandler = new DeleteHandler(db);
 	}
 
-	private void MainMenuDisplay() throws IOException {
+	private void MainMenuDisplay() throws IOException, SQLException {
 		reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("----MAIN MENU----\nSelect command:");
 		System.out.print("\tInsert (I)\n" + "\tUpdate (U)\n" + "\tDelete (D)\n" + "\tQuery (Q)\n");
@@ -69,7 +73,7 @@ public class CLIMenu {
 			break;
 		case "X":
 			System.out.println("Program terminated...");
-            db.CloseConnection();
+			db.CloseConnection();
 			System.exit(0);
 			break;
 		default:
@@ -78,7 +82,7 @@ public class CLIMenu {
 		}
 	}
 
-	private void Command(String selection) throws IOException {
+	private void Command(String selection) throws IOException, SQLException {
 		System.out.println("Select which object to " + selection.toUpperCase() + ":");
 		System.out.print(Game.Command() + Person.Command() + User.Command() + Character.Command() + Composer.Command());
 		DisplayExit();
@@ -209,7 +213,7 @@ public class CLIMenu {
 		}
 	}
 
-	private void InsertPersonMenu() throws IOException {
+	private void InsertPersonMenu() throws IOException, SQLException {
 
 		System.out.print("Format [SSN] [FIRST NAME] [LAST NAME] [DOB MM-DD-YYYY]\nType person information:");
 		input = reader.readLine();
@@ -232,13 +236,15 @@ public class CLIMenu {
 		String dob = obj.DOB;
 		String fullName = obj.GetFullName();
 
+		Statement insert = db.conn.createStatement();
+
 		insert.executeUpdate("INSERT INTO PERSON" + "VALUES (ssn, firstName, lastName, dob, fullName)");
 
 	}
 
-	private void UpdatePersonMenu(Person obj) throws IOException {
+	private void UpdatePersonMenu(Person obj) throws IOException, SQLException {
 		// Need to check if SSN is valid and pull data from DB
-
+		Statement updateStatement = db.conn.createStatement();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Person.ListAttributes();
 		System.out.print("Selection:");
@@ -291,7 +297,7 @@ public class CLIMenu {
 		UpdatePersonMenu(obj);
 	}
 
-	private void InsertGameMenu() throws IOException {
+	private void InsertGameMenu() throws IOException, SQLException {
 		System.out.print(
 				"Format [GAME_ID] [PAGE_VIEWS] [GENRE] [SCORE] [PLOT] [RETAILERS] [PLATFORM] [RATING] [TITLE]\nType game information:");
 		input = reader.readLine();
@@ -326,13 +332,17 @@ public class CLIMenu {
 		String rating = obj.rating;
 		String title = obj.title;
 
+		Statement insert = db.conn.createStatement();
+
 		insert.executeUpdate("INSERT INTO GAME"
 				+ "VALUES (gameID, pageViews, genre, score, plot, retailers, platform, rating, title)");
 
 	}
 
-	private void UpdateGameMenu(Game obj) throws IOException {
+	private void UpdateGameMenu(Game obj) throws IOException, SQLException {
 		// Need to check if SSN is valid and pull data from DB
+
+		Statement updateStatement = db.conn.createStatement();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Game.ListAttributes();
 		System.out.print("Selection:");
@@ -395,7 +405,7 @@ public class CLIMenu {
 		UpdateGameMenu(obj);
 	}
 
-	private void InsertUserMenu() throws IOException {
+	private void InsertUserMenu() throws IOException, SQLException {
 		System.out.print("Format [USER_NAME] [ADMIN_FLAG] [SSN]\nType game information:");
 		input = reader.readLine();
 		String[] values = input.split(" ");
@@ -413,10 +423,14 @@ public class CLIMenu {
 		String adminFlag = obj.AdminFlag;
 		String ssn = obj.SSN;
 
+		Statement insert = db.conn.createStatement();
+
 		insert.executeUpdate("INSERT INTO USER" + "VALUES (endUserName, adminFlag, ssn)");
 	}
 
-	private void UpdateUserMenu(User obj) throws IOException {
+	private void UpdateUserMenu(User obj) throws IOException, SQLException {
+
+		Statement updateStatement = db.conn.createStatement();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		User.ListAttributes();
 		System.out.print("Selection:");
@@ -460,7 +474,7 @@ public class CLIMenu {
 		UpdateUserMenu(obj);
 	}
 
-	private void InsertCharacterMenu() throws IOException {
+	private void InsertCharacterMenu() throws IOException, SQLException {
 		System.out.print("Format [NAME] [GAME_ID]\nType game information:");
 		input = reader.readLine();
 		String[] values = input.split(" ");
@@ -477,10 +491,13 @@ public class CLIMenu {
 		String cName = obj.name;
 		String gameID = obj.GameID;
 
+		Statement insert = db.conn.createStatement();
 		insert.executeUpdate("INSERT INTO CHARACTER_IN_GAME" + "VALUES (cName, gameID)");
 	}
 
-	private void UpdateCharacterMenu(Character obj) throws IOException {
+	private void UpdateCharacterMenu(Character obj) throws IOException, SQLException {
+
+		Statement updateStatement = db.conn.createStatement();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Character.ListAttributes();
 		System.out.print("Selection:");
@@ -514,7 +531,7 @@ public class CLIMenu {
 		UpdateCharacterMenu(obj);
 	}
 
-	private void InsertDeveloperMenu() throws IOException {
+	private void InsertDeveloperMenu() throws IOException, SQLException {
 		System.out.print("Format [SSN] [GAME_ID]\nType game information:");
 		input = reader.readLine();
 		String[] values = input.split(" ");
@@ -531,10 +548,14 @@ public class CLIMenu {
 		String ssn = obj.SSN;
 		String gameID = obj.GameID;
 
+		Statement insert = db.conn.createStatement();
+
 		insert.executeUpdate("INSERT INTO DEVELOPER" + "VALUES (ssn, gameID)");
 	}
 
-	private void UpdateDeveloperMenu(Developer obj) throws IOException {
+	private void UpdateDeveloperMenu(Developer obj) throws IOException, SQLException {
+
+		Statement updateStatement = db.conn.createStatement();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Developer.ListAttributes();
 		System.out.print("Selection:");
@@ -569,7 +590,7 @@ public class CLIMenu {
 		UpdateDeveloperMenu(obj);
 	}
 
-	private void InsertComposerMenu() throws IOException {
+	private void InsertComposerMenu() throws IOException, SQLException {
 		System.out.print("Format [SSN] [GAMEID]\nType game information:");
 		input = reader.readLine();
 		String[] values = input.split(" ");
@@ -586,10 +607,14 @@ public class CLIMenu {
 		String ssn = obj.SSN;
 		String gameID = obj.GameID;
 
+		Statement insert = db.conn.createStatement();
+
 		insert.executeUpdate("INSERT INTO COMPOSER" + "VALUES (ssn, gameID)");
 	}
 
-	private void UpdateComposerMenu(Composer obj) throws IOException {
+	private void UpdateComposerMenu(Composer obj) throws IOException, SQLException {
+
+		Statement updateStatement = db.conn.createStatement();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Composer.ListAttributes();
 		System.out.print("Selection:");
@@ -624,7 +649,7 @@ public class CLIMenu {
 		UpdateComposerMenu(obj);
 	}
 
-	private void InsertGameSalesMenu() throws IOException {
+	private void InsertGameSalesMenu() throws IOException, SQLException {
 		System.out.print("Format [GAMEID] [MONTH] [YEAR] [AMOUNT]\nType game information:");
 		input = reader.readLine();
 		String[] values = input.split(" ");
@@ -643,12 +668,15 @@ public class CLIMenu {
 		String mMonth = obj.Month;
 		String yYear = obj.Year;
 		String amount = obj.Amount;
+		Statement insert = db.conn.createStatement();
 
 		insert.executeUpdate("INSERT INTO GAME_SALES" + "VALUES (gameID, mMonth, yYear, amount)");
 
 	}
 
-	private void UpdateGameSalesMenu(GameSales obj) throws IOException {
+	private void UpdateGameSalesMenu(GameSales obj) throws IOException, SQLException {
+
+		Statement updateStatement = db.conn.createStatement();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		GameSales.ListAttributes();
 		System.out.print("Selection:");
@@ -704,7 +732,7 @@ public class CLIMenu {
 		UpdateGameSalesMenu(obj);
 	}
 
-	private void InsertPublisherMenu() throws IOException {
+	private void InsertPublisherMenu() throws IOException, SQLException {
 		System.out.print("Format [COMPANY NAME] [GAME_ID]\nType game information:");
 		input = reader.readLine();
 		String[] values = input.split(" ");
@@ -721,10 +749,14 @@ public class CLIMenu {
 		String publishingCompanyName = obj.CompanyName;
 		String gameID = obj.GameID;
 
+		Statement insert = db.conn.createStatement();
+
 		insert.executeUpdate("INSERT INTO PUBLISHER" + "VALUES (publishingCompanyName, gameID)");
 	}
 
-	private void UpdatePublisherMenu(Publisher obj) throws IOException {
+	private void UpdatePublisherMenu(Publisher obj) throws IOException, SQLException {
+
+		Statement updateStatement = db.conn.createStatement();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Publisher.ListAttributes();
 		System.out.print("Selection:");
