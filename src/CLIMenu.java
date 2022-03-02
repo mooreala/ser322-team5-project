@@ -99,6 +99,12 @@ public class CLIMenu {
 					input = reader.readLine();
 					User obj = new User();
 					obj = db.QueryUser(input);
+
+                    if (obj == null) {
+                        System.out.println("Unable to find a matching tuple. Try again.");
+                        break;
+                    }
+
 					UpdatePersonMenu(obj);
 					break;
 				}
@@ -113,6 +119,12 @@ public class CLIMenu {
 					input = reader.readLine();
 					Game obj = new Game();
 					obj = db.QueryGame(input);
+
+                    if (obj == null) {
+                        System.out.println("Unable to find a matching tuple. Try again.");
+                        break;
+                    }
+                    
 					UpdateGameMenu(obj);
 					break;
 				}
@@ -127,6 +139,12 @@ public class CLIMenu {
 					input = reader.readLine();
 					User obj = new User();
 					obj = db.QueryUser(input);
+
+                    if (obj == null) {
+                        System.out.println("Unable to find a matching tuple. Try again.");
+                        break;
+                    }
+
 					UpdateUserMenu(obj);
 					break;
 				}
@@ -141,6 +159,12 @@ public class CLIMenu {
 					input = reader.readLine();
 					Character obj = new Character();
 					obj = db.QueryCharacter(input);
+
+                    if (obj == null) {
+                        System.out.println("Unable to find a matching tuple. Try again.");
+                        break;
+                    }
+
 					UpdateCharacterMenu(obj);
 					break;
 				}
@@ -155,6 +179,12 @@ public class CLIMenu {
 					input = reader.readLine();
 					Developer obj = new Developer();
 					obj = db.QueryDeveloper(input);
+
+                    if (obj == null) {
+                        System.out.println("Unable to find a matching tuple. Try again.");
+                        break;
+                    }
+
 					UpdateDeveloperMenu(obj);
 					break;
 				}
@@ -169,6 +199,12 @@ public class CLIMenu {
 					input = reader.readLine();
 					Composer obj = new Composer();
 					obj = db.QueryComposer(input);
+
+                    if (obj == null) {
+                        System.out.println("Unable to find a matching tuple. Try again.");
+                        break;
+                    }
+
 					UpdateComposerMenu(obj);
 					break;
 				}
@@ -183,6 +219,12 @@ public class CLIMenu {
 					input = reader.readLine();
 					GameSales obj = new GameSales();
 					obj = db.QueryGameSales(input);
+
+                    if (obj == null) {
+                        System.out.println("Unable to find a matching tuple. Try again.");
+                        break;
+                    }
+
 					UpdateGameSalesMenu(obj);
 					break;
 				}
@@ -197,6 +239,12 @@ public class CLIMenu {
 					input = reader.readLine();
 					Publisher obj = new Publisher();
 					obj = db.QueryPublisher(input);
+
+                    if (obj == null) {
+                        System.out.println("Unable to find a matching tuple. Try again.");
+                        break;
+                    }
+                    
 					UpdatePublisherMenu(obj);
 					break;
 				}
