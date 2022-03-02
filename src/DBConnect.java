@@ -52,10 +52,6 @@ public class DBConnect {
 		ResultSet rs = null;
 		Statement stmnt = null;
 		try {
-			//Load the JDBC driver
-			Class.forName(driver);
-			//Make connection
-			conn = DriverManager.getConnection(url, userName, password);
 			//Make query
 			String sql = "SELECT * FROM Game";
 			stmnt = conn.createStatement();
@@ -94,7 +90,6 @@ public class DBConnect {
 			{
 				if(rs !=null) rs.close();
 				if(stmnt !=null) stmnt.close();
-				if(conn !=null) conn.close();
 			}
 			catch (Exception e){
 				e.printStackTrace();
@@ -133,7 +128,6 @@ public class DBConnect {
 			{
 				if(rs !=null) rs.close();
 				if(stmnt !=null) stmnt.close();
-				if(conn !=null) conn.close();
 			}
 			catch (Exception e){
 				e.printStackTrace();
@@ -169,7 +163,6 @@ public class DBConnect {
 			{
 				if(rs !=null) rs.close();
 				if(stmnt !=null) stmnt.close();
-				if(conn !=null) conn.close();
 			}
 			catch (Exception e){
 				e.printStackTrace();
@@ -182,10 +175,6 @@ public class DBConnect {
 		Statement stmnt = null;
 		Person obj = new Person();
 		try {
-			//Load the JDBC driver
-			Class.forName(driver);
-			//Make connection
-			conn = DriverManager.getConnection(url, userName, password);
 			//Make query
 			String sql = "SELECT *\r\n"
 					+ "FROM PERSON\r\n"
@@ -211,7 +200,6 @@ public class DBConnect {
 			{
 				if(rs !=null) rs.close();
 				if(stmnt !=null) stmnt.close();
-				if(conn !=null) conn.close();
 			}
 			catch (Exception e){
 				e.printStackTrace();
@@ -247,7 +235,6 @@ public class DBConnect {
 			{
 				if(rs !=null) rs.close();
 				if(stmnt !=null) stmnt.close();
-				if(conn !=null) conn.close();
 			}
 			catch (Exception e){
 				e.printStackTrace();
@@ -260,10 +247,6 @@ public class DBConnect {
 		Statement stmnt = null;
 		Developer obj = new Developer();
 		try {
-			//Load the JDBC driver
-			Class.forName(driver);
-			//Make connection
-			conn = DriverManager.getConnection(url, userName, password);
 			//Make query
 			String sql = "SELECT *\r\n"
 					+ "FROM DEVELOPER\r\n"
@@ -287,7 +270,6 @@ public class DBConnect {
 			{
 				if(rs !=null) rs.close();
 				if(stmnt !=null) stmnt.close();
-				if(conn !=null) conn.close();
 			}
 			catch (Exception e){
 				e.printStackTrace();
@@ -322,7 +304,6 @@ public class DBConnect {
 			{
 				if(rs !=null) rs.close();
 				if(stmnt !=null) stmnt.close();
-				if(conn !=null) conn.close();
 			}
 			catch (Exception e){
 				e.printStackTrace();
@@ -359,7 +340,6 @@ public class DBConnect {
 			{
 				if(rs !=null) rs.close();
 				if(stmnt !=null) stmnt.close();
-				if(conn !=null) conn.close();
 			}
 			catch (Exception e){
 				e.printStackTrace();
@@ -394,7 +374,6 @@ public class DBConnect {
 			{
 				if(rs !=null) rs.close();
 				if(stmnt !=null) stmnt.close();
-				if(conn !=null) conn.close();
 			}
 			catch (Exception e){
 				e.printStackTrace();
@@ -408,10 +387,6 @@ public class DBConnect {
 		ResultSet rs = null;
 		Statement stmnt = null;
 		try {
-			//Load the JDBC driver
-			Class.forName(driver);
-			//Make connection
-			conn = DriverManager.getConnection(url, userName, password);
 			//Make query
 			String sql = "UPDATE Game\r\n"
 					+ "SET TITLE='" + obj.title + "',"
@@ -431,7 +406,6 @@ public class DBConnect {
 			{
 				if(rs !=null) rs.close();
 				if(stmnt !=null) stmnt.close();
-				if(conn !=null) conn.close();
 			}
 			catch (Exception e){
 				e.printStackTrace();
