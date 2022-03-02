@@ -235,7 +235,6 @@ public class CLIMenu {
 		String firstName = obj.firstName;
 		String lastName = obj.lastName;
 		String dob = obj.DOB;
-		String fullName = obj.GetFullName();
 
 		String sql = "INSERT INTO PERSON (SSN, FIRST_NAME, LAST_NAME, DOB) VALUES (" + ssn + ",'" + firstName + "','"
 				+ lastName + "','" + dob + "')";
@@ -246,7 +245,7 @@ public class CLIMenu {
 
 	private void UpdatePersonMenu(Person obj) throws IOException, SQLException {
 		// Need to check if SSN is valid and pull data from DB
-		Statement updateStatement = db.conn.createStatement();
+
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Person.ListAttributes();
 		System.out.print("Selection:");
@@ -262,35 +261,49 @@ public class CLIMenu {
 			System.out.print("New SSN:");
 			input = reader.readLine();
 			obj.SSN = input;
-
 			String ssn = obj.SSN;
-			updateStatement.executeUpdate("UPDATE PERSON SET SSN =  ssn WHERE SSN=ssn");
+
+			String sql = "UPDATE PERSON SET SSN =" + ssn + "WHERE SSN=" + ssn;
+			Statement statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
+
 			break;
 		case "2":
 			System.out.print("New First Name:");
 			input = reader.readLine();
 			obj.firstName = input;
+			String ssn2 = obj.SSN;
 
 			String firstName = obj.firstName;
-			updateStatement.executeUpdate("UPDATE PERSON SET FIRST_NAME = firstName WHERE SSN=ssn");
+
+			sql = "UPDATE PERSON SET FIRST_NAME =" + firstName + "WHERE SSN=" + ssn2;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 
 			break;
 		case "3":
 			System.out.print("New Last Name:");
 			input = reader.readLine();
 			obj.lastName = input;
+			String ssn3 = obj.SSN;
 
 			String lastName = obj.lastName;
-			updateStatement.executeUpdate("UPDATE PERSON SET LAST_NAME = lastName WHERE SSN=ssn");
+			sql = "UPDATE PERSON SET LAST_NAME =" + lastName + "WHERE SSN=" + ssn3;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 
 			break;
 		case "4":
 			System.out.print("New DOB:");
 			input = reader.readLine();
 			obj.DOB = input;
+			String ssn4 = obj.SSN;
 
 			String dob = obj.DOB;
-			updateStatement.executeUpdate("UPDATE PERSON SET DOB = dob WHERE SSN=ssn");
+			sql = "UPDATE PERSON SET DOB =" + dob + "WHERE SSN=" + ssn4;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
+
 			break;
 
 		default:
@@ -301,7 +314,7 @@ public class CLIMenu {
 
 	private void InsertGameMenu() throws IOException, SQLException {
 		System.out.print(
-				"Format [GAME_ID] [PAGE_VIEWS] [GENRE] [SCORE] [PLOT] [RETAILERS] [PLATFORM] [RATING] [TITLE]\nType game information:");
+				"Format [GAME_ID]  [PAGE_VIEWS] [GENRE] [SCORE] [PLOT] [RETAILERS] [PLATFORM] [RATING] [TITLE]\nType game information:");
 		input = reader.readLine();
 		String[] values = input.split(" ");
 		if (values.length != 9) {
@@ -346,7 +359,6 @@ public class CLIMenu {
 	private void UpdateGameMenu(Game obj) throws IOException, SQLException {
 		// Need to check if SSN is valid and pull data from DB
 
-		Statement updateStatement = db.conn.createStatement();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Game.ListAttributes();
 		System.out.print("Selection:");
@@ -366,7 +378,10 @@ public class CLIMenu {
 			obj.genre = input;
 
 			String genre = obj.genre;
-			updateStatement.executeUpdate("UPDATE GAME SET GENRE = genre WHERE GAME_ID = gameID");
+
+			String sql = "UPDATE GAME SET GENRE =" + genre + "WHERE GAME_ID =" + gameID;
+			Statement statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 
 			break;
 		case "2":
@@ -375,32 +390,45 @@ public class CLIMenu {
 			obj.title = input;
 
 			String title = obj.title;
-			updateStatement.executeUpdate("UPDATE GAME SET TITLE = title WHERE GAME_ID = gameID");
+			String gameID2 = obj.gameID;
+
+			sql = "UPDATE GAME SET TITLE =" + title + "WHERE GAME_ID =" + gameID2;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
+
 			break;
 		case "3":
 			System.out.print("New PageViews:");
 			input = reader.readLine();
 			obj.pageViews = input;
-
+			String gameID3 = obj.gameID;
 			String pageViews = obj.pageViews;
-			updateStatement.executeUpdate("UPDATE GAME SET PAGE_VIEWS = pageViews WHERE GAME_ID = gameID");
+
+			sql = "UPDATE GAME SET PAGE_VIEWS =" + pageViews + "WHERE GAME_ID =" + gameID3;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
+
 			break;
 		case "4":
 			System.out.print("New Platform:");
 			input = reader.readLine();
 			obj.platform = input;
-
+			String gameID4 = obj.gameID;
 			String platform = obj.platform;
-			updateStatement.executeUpdate("UPDATE GAME SET PLATFORM = platform WHERE GAME_ID = gameID");
+			sql = "UPDATE GAME SET PLATFORM =" + platform + "WHERE GAME_ID =" + gameID4;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 
 			break;
 		case "5":
 			System.out.print("New Score:");
 			input = reader.readLine();
 			obj.score = input;
-
+			String gameID5 = obj.gameID;
 			String score = obj.score;
-			updateStatement.executeUpdate("UPDATE GAME SET SCORE = score WHERE GAME_ID = gameID");
+			sql = "UPDATE GAME SET SCORE =" + score + "WHERE GAME_ID =" + gameID5;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 
 			break;
 		default:
@@ -436,7 +464,6 @@ public class CLIMenu {
 
 	private void UpdateUserMenu(User obj) throws IOException, SQLException {
 
-		Statement updateStatement = db.conn.createStatement();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		User.ListAttributes();
 		System.out.print("Selection:");
@@ -453,8 +480,10 @@ public class CLIMenu {
 			obj.SSN = input;
 
 			String endUserName = obj.EndUserName;
-			updateStatement
-					.executeUpdate("UPDATE USER SET END_USER_NAME = endUserName WHERE END_USER_NAME = endUserName");
+
+			String sql = "UPDATE END_USER SET END_USER_NAME =" + endUserName + "WHERE END_USER_NAME =" + endUserName;
+			Statement statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 
 			break;
 		case "2":
@@ -463,15 +492,20 @@ public class CLIMenu {
 			obj.AdminFlag = input;
 
 			String adminFlag = obj.firstName;
-			updateStatement.executeUpdate("UPDATE USER SET ADMIN_FLAG = adminFlag WHERE END_USER_NAME = endUserName");
+			String endUserName2 = obj.EndUserName;
+			sql = "UPDATE END_USER SET APPROVED_FLAG =" + adminFlag + "WHERE END_USER_NAME =" + endUserName2;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 			break;
 		case "3":
 			System.out.print("New SSN:");
 			input = reader.readLine();
 			obj.SSN = input;
-
+			String endUserName3 = obj.EndUserName;
 			String ssn = obj.SSN;
-			updateStatement.executeUpdate("UPDATE USER SET SSN = ssn WHERE END_USER_NAME = endUserName");
+			sql = "UPDATE END_USER SET SSN =" + ssn + "WHERE END_USER_NAME =" + endUserName3;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 
 			break;
 		default:
@@ -505,7 +539,6 @@ public class CLIMenu {
 
 	private void UpdateCharacterMenu(Character obj) throws IOException, SQLException {
 
-		Statement updateStatement = db.conn.createStatement();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Character.ListAttributes();
 		System.out.print("Selection:");
@@ -522,15 +555,21 @@ public class CLIMenu {
 			obj.name = input;
 
 			String cName = obj.name;
-			updateStatement.executeUpdate("UPDATE CHARACTER SET C_NAME = cName WHERE C_NAME = cName");
+			String sql = "UPDATE CHARACTER_IN_GAME SET C_NAME =" + cName + "WHERE C_NAME =" + cName;
+			Statement statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
+
 			break;
 		case "2":
 			System.out.print("Game_ID:");
 			input = reader.readLine();
 			obj.GameID = input;
+			String cName2 = obj.name;
 
 			String gameID = obj.GameID;
-			updateStatement.executeUpdate("UPDATE CHARACTER SET GAME_ID = gameID WHERE C_NAME = cName");
+			sql = "UPDATE CHARACTER_IN_GAME SET GAME_ID =" + gameID + "WHERE C_NAME =" + cName2;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 
 			break;
 		default:
@@ -564,7 +603,6 @@ public class CLIMenu {
 
 	private void UpdateDeveloperMenu(Developer obj) throws IOException, SQLException {
 
-		Statement updateStatement = db.conn.createStatement();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Developer.ListAttributes();
 		System.out.print("Selection:");
@@ -581,7 +619,9 @@ public class CLIMenu {
 			obj.SSN = input;
 
 			String ssn = obj.SSN;
-			updateStatement.executeUpdate("UPDATE DEVELOPER SET SSN = ssn WHERE SSN = ssn");
+			String sql = "UPDATE DEVELOPER SET SSN =" + ssn + "WHERE SSN =" + ssn;
+			Statement statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 
 			break;
 		case "2":
@@ -590,8 +630,12 @@ public class CLIMenu {
 			obj.GameID = input;
 
 			String gameID = obj.GameID;
+			String ssn2 = obj.SSN;
 
-			updateStatement.executeUpdate("UPDATE DEVELOPER SET GAME_ID = gameID WHERE SSN = ssn");
+			sql = "UPDATE DEVELOPER SET GAME_ID =" + gameID + "WHERE SSN =" + ssn2;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
+
 			break;
 		default:
 			System.out.println(invalid);
@@ -624,7 +668,6 @@ public class CLIMenu {
 
 	private void UpdateComposerMenu(Composer obj) throws IOException, SQLException {
 
-		Statement updateStatement = db.conn.createStatement();
 		System.out.println("Select attribute to update or press enter to execute changes:");
 		Composer.ListAttributes();
 		System.out.print("Selection:");
@@ -641,16 +684,20 @@ public class CLIMenu {
 			obj.SSN = input;
 
 			String ssn = obj.SSN;
-			updateStatement.executeUpdate("UPDATE COMPOSER SET SSN = ssn WHERE SSN = ssn");
+			String sql = "UPDATE COMPOSER SET SSN =" + ssn + "WHERE SSN =" + ssn;
+			Statement statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 
 			break;
 		case "2":
 			System.out.print("GameID:");
 			input = reader.readLine();
 			obj.GameID = input;
-
+			String ssn2 = obj.SSN;
 			String gameID = obj.GameID;
-			updateStatement.executeUpdate("UPDATE COMPOSER SET GAME_ID = gameID WHERE SSN = ssn");
+			sql = "UPDATE COMPOSER SET GAME_ID =" + gameID + "WHERE SSN =" + ssn2;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 
 			break;
 		default:
@@ -706,27 +753,41 @@ public class CLIMenu {
 			obj.GameID = input;
 
 			String gameID = obj.GameID;
-			updateStatement.executeUpdate(
-					"UPDATE GAME_SALES SET GAME_ID = gameID WHERE GAME_ID = gameID AND M_MONTH = mMonth AND Y_YEAR = yYear");
+			String mMonth = obj.Month;
+			String yYear = obj.Year;
+
+			String sql = "UPDATE GAME_SALES SET GAME_ID =" + gameID + "WHERE gameID =" + gameID + "AND M_Month = "
+					+ mMonth + "AND Y_Year =" + yYear;
+			Statement statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 			break;
 		case "2":
 			System.out.print("New Month:");
 			input = reader.readLine();
 			obj.Month = input;
 
-			String mMonth = obj.Month;
-			updateStatement.executeUpdate(
-					"UPDATE GAME_SALES SET M_MONTH = mMonth WHERE GAME_ID = gameID AND M_MONTH = mMonth AND Y_YEAR = yYear");
+			String month2 = obj.Month;
+			String gameID2 = obj.GameID;
+			String year2 = obj.Year;
 
+			sql = "UPDATE GAME_SALES SET M_MONTH =" + month2 + "WHERE gameID =" + gameID2 + "AND M_Month = " + month2
+					+ "AND Y_Year =" + year2;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 			break;
 		case "3":
 			System.out.print("New Year:");
 			input = reader.readLine();
 			obj.Year = input;
 
-			String yYear = obj.Year;
-			updateStatement.executeUpdate(
-					"UPDATE GAME_SALES SET Y_YEAR = yYear WHERE GAME_ID = gameID AND M_MONTH = mMonth AND Y_YEAR = yYear");
+			String month3 = obj.Month;
+			String gameID3 = obj.GameID;
+			String year3 = obj.Year;
+
+			sql = "UPDATE GAME_SALES SET Y_YEAR =" + year3 + "WHERE gameID =" + gameID3 + "AND M_Month = " + month3
+					+ "AND Y_Year =" + year3;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 
 			break;
 		case "4":
@@ -735,9 +796,14 @@ public class CLIMenu {
 			obj.Amount = input;
 
 			String amount = obj.Amount;
-			updateStatement.executeUpdate(
-					"UPDATE GAME_SALES SET AMOUNT = amount WHERE GAME_ID = gameID AND M_MONTH = mMonth AND Y_YEAR = yYear");
+			String month4 = obj.Month;
+			String gameID4 = obj.GameID;
+			String year4 = obj.Year;
 
+			sql = "UPDATE GAME_SALES SET AMOUNT =" + amount + "WHERE gameID =" + gameID4 + "AND M_Month = " + month4
+					+ "AND Y_Year =" + year4;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 			break;
 		default:
 			System.out.println(invalid);
@@ -789,16 +855,21 @@ public class CLIMenu {
 			obj.CompanyName = input;
 
 			String companyName = obj.CompanyName;
-			updateStatement
-					.executeUpdate("UPDATE PUBLISHER SET PUBLISHING_COMPANY_NAME = companyName WHERE GAME_ID = gameID");
+			String gameID = obj.GameID;
+
+			String sql = "UPDATE PUBLISHER SET PUBLISHING_COMPANY_NAME =" + companyName + "WHERE GAME_ID =" + gameID;
+			Statement statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 			break;
 		case "2":
 			System.out.print("New Game_ID:");
 			input = reader.readLine();
 			obj.GameID = input;
 
-			String gameID = obj.GameID;
-			updateStatement.executeUpdate("UPDATE PUBLISHER SET GAME_ID = gameID WHERE GAME_ID = gameID");
+			String gameID2 = obj.GameID;
+			sql = "UPDATE PUBLISHER SET GAME_ID =" + gameID2 + "WHERE GAME_ID =" + gameID2;
+			statement = db.conn.createStatement();
+			statement.executeUpdate(sql);
 
 			break;
 		default:
