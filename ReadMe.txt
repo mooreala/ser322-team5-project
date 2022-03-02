@@ -79,7 +79,7 @@ Main method: CLIMenu.main
 /           Project Video             /
 ///////////////////////////////////////
 
-Link: 
+Link: https://youtu.be/bWoar8d7Xv8 
 
 ///////////////////////////////////////
 /     Team Member Contributions       /
@@ -107,6 +107,10 @@ Christopher:
     - Created CLIMenu class which is the application entry point.
     
 Josh:
+        - Created all Search/Queries for application
+        - Helped with creation of update/insert sections
+        - Created/edited final video for application and uploaded to Youtube
+        - Debugged main CLIMenu
 
 Luca:
 
