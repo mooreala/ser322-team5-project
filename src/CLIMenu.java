@@ -348,7 +348,7 @@ public class CLIMenu {
 		String title = obj.title;
 
 		String sql = "INSERT INTO Game VALUES (GAME_ID, PAGE_VIEWS, APPROVED_FLAG, GENRE, SCORE, PLOT, RETAILERS, PLATFORM, RATING, TITLE) ("
-				+ gameID + ",'" + pageViews + "','" + approvedFlag + "','" + genre + "','" + score + "','" + plot
+				+ gameID + "','" + pageViews + "','" + approvedFlag + "','" + genre + "','" + score + "','" + plot
 				+ "','" + retailers + "','" + platform + "','" + rating + "','" + title + "' )";
 
 		Statement statement = db.conn.createStatement();
@@ -660,7 +660,7 @@ public class CLIMenu {
 		String ssn = obj.SSN;
 		String gameID = obj.GameID;
 
-		String sql = "INSERT INTO COMPOSER (SSN, GAME_ID) VALUES (" + ssn + ",'" + gameID + "')";
+		String sql = "INSERT INTO COMPOSER (SSN, GAME_ID) VALUES (" + ssn + "','" + gameID + "')";
 
 		Statement statement = db.conn.createStatement();
 		statement.executeUpdate(sql);
@@ -684,7 +684,7 @@ public class CLIMenu {
 			obj.SSN = input;
 
 			String ssn = obj.SSN;
-			String sql = "UPDATE COMPOSER SET SSN =" + ssn + "WHERE SSN =" + ssn;
+			String sql = "UPDATE COMPOSER SET SSN = " + ssn + "WHERE SSN =" + ssn;
 			Statement statement = db.conn.createStatement();
 			statement.executeUpdate(sql);
 
