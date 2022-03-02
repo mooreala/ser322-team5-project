@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -366,6 +367,9 @@ public class CLIMenu {
 		// Update Object value and loop
 
 		String gameID = obj.gameID;
+        PreparedStatement ps;
+        Statement statement;
+        
 		switch (input) {
 		case "":
 			db.UpdateGame(obj);
@@ -379,9 +383,15 @@ public class CLIMenu {
 
 			String genre = obj.genre;
 
-			String sql = "UPDATE GAME SET GENRE =" + genre + "WHERE GAME_ID =" + gameID;
-			Statement statement = db.conn.createStatement();
-			statement.executeUpdate(sql);
+			//String sql = "UPDATE GAME SET GENRE=" + genre + " WHERE GAME_ID =" + gameID;
+            String sql = "UPDATE GAME SET GENRE=? WHERE GAME_ID=?";
+            ps = db.conn.prepareStatement(sql);
+            ps.setString(1, input);
+            ps.setInt(2, Integer.parseInt(obj.gameID));
+            ps.executeUpdate();
+
+			//Statement statement = db.conn.createStatement();
+			//statement.executeUpdate(sql);
 
 			break;
 		case "2":
